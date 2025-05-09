@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Js componentes</title>
-    <link rel="shortcut icon" href="comunes/resources/icons/icons8-javascript-50.png" type="image/x-icon">
-    <link rel="stylesheet" href="index/index-css.css">
+    <link rel="shortcut icon" href="./comunes/resources/icons/icons8-javascript-50.png" type="image/x-icon">
+    <link rel="stylesheet" href="./index/index-css.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"/>
 </head>
 <body>
@@ -26,8 +26,58 @@
     </header>
 
     <main>
+        <form class="oculto" action="" method="get" id="signupForm">
+            <span id="iconoFondoForm" class="material-symbols-outlined iconoAmpliado">sentiment_dissatisfied</span>
+            <div class="login centrado botonRadioOculto">Sign Up</div>
+            <div class="inputsBox">
+                <label class="columnaCentrada espaciadoVertical" for="user">
+                    <div class="iconoBox centrado">
+                        <span class="material-symbols-outlined iconoForm">account_circle</span>
+                        <span class="material-symbols-outlined iconoForm iconoChecked">person_shield</span>
+                    </div>
+                    <input class="inputText" type="text" name="user" id="user" placeholder="Nombre de usuario">
+                </label>
+                <label class="columnaCentrada espaciadoVertical" for="pass">
+                    <div class="iconoBox">
+                        <span class="material-symbols-outlined iconoForm">lock</span>
+                        <span class="material-symbols-outlined iconoForm iconoChecked">verified_user</span>
+                    </div>
+                    <div class="inputFila filaCentrada">
+                        <input class="inputText" type="password" name="pass" id="pass" placeholder="Contraseña">
+                        <span class="visibilidadBox icono centrado">
+                            <span class="visibilidadIcono material-symbols-outlined">visibility_off</span>
+                        </span>
+                    </div>
+                </label>
+                <label class="columnaCentrada espaciadoVertical" for="repeatPass">
+                    <div class="iconoBox">
+                        <span class="material-symbols-outlined iconoForm">password</span>
+                        <span class="material-symbols-outlined iconoForm iconoChecked">verified_user</span>
+                    </div>
+                    <div class="inputFila filaCentrada">
+                        <input class="inputText" type="password" name="repeatPass" id="repeatPass" placeholder="Repite contraseña">
+                        <span class="visibilidadBox icono centrado">
+                            <span class="visibilidadIcono material-symbols-outlined">visibility_off</span>
+                        </span>
+                    </div>
+                </label>
+            </div>
+            <label class="condiciones filaCentrada">
+                <div class="condicionesCheck material-symbols-outlined">
+                    <input class="inputOculto" type="checkbox" name="legal" id="legal"> 
+                    <span class="material-symbols-outlined iconoCheck">check_small</span>
+                </div>
+                Acepto las 
+                <a class="enlaceCondiciones" href="./legal/legal.html">&nbsp;condiciones</a>
+            </label>
+            <div class="botones espaciadoHorizontal">
+                <button class="botonIconoLargo centrado" type="submit" id="aceptar" disabled>Aceptar</button>
+                <button class="botonIconoLargo centrado" type="button" id="cerrar">Cerrar</button>
+            </div>
+        </form>
     </main>
 
-    <script src="index/scripts/login.js"></script>
+    <script src="./index/scripts/login.js"></script>
+    <script src="./index/scripts/signupForm.js"></script>
 </body>
 </html>

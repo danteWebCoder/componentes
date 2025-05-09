@@ -5,11 +5,19 @@ let password = ""
 let estadoBoton = false
 
 const cambiarEstadoBoton = () => {
-    botonLogin.style.backgroundColor = login.value.length > 5 ? "var(--colorClaro)" : "var(--colorOscuro)"
-    botonLogin.style.cursor = login.value.length > 5 ? "pointer" : "auto"
-    botonLogin.style.pointerEvents = login.value.length > 5 ? "auto" : "none"
-    botonLogin.querySelector(".icono").style.color = login.value.length > 5 ? "var(--colorOscuro)" : "var(--colorClaro)"
-    estadoBoton = login.value.length > 5 ? true : false
+    if (login.value.length > 5) {
+        botonLogin.style.backgroundColor = "var(--colorClaro)"
+        botonLogin.style.cursor = "pointer"
+        botonLogin.style.pointerEvents = "auto"
+        botonLogin.querySelector(".icono").style.color = "var(--colorOscuro)"
+        estadoBoton = true
+    } else {
+        botonLogin.style.backgroundColor = "var(--colorOscuro)"
+        botonLogin.style.cursor = "auto"
+        botonLogin.style.pointerEvents =  "none"
+        botonLogin.querySelector(".icono").style.color = "var(--colorClaro)"
+        estadoBoton = false
+    }
 }
 
 const limpiarLogin = () => {login.value = ""}
@@ -20,14 +28,15 @@ const guardarDatos = () => {
         login.placeholder = "Contraseña"
     } else if(estadoBoton) {
         password = login.value
-        login.placeholder = "Verificando"
+        login.placeholder = "VERIFICANDO"
     }
+
     limpiarLogin()
-    login.focus()
-    if (usuario !== "" && password !== "") login.blur()
-    console.log(usuario, password)
+    usuario !== "" && password !== "" ? login.blur() : login.focus()
+    requestAnimationFrame(() => {cambiarEstadoBoton()}) // parche por el render del navegador desincronizado
 }
 
 limpiarLogin()
 login.addEventListener("input", cambiarEstadoBoton)
+login.addEventListener("keydown", (event) => {event.key === "Enter" ? guardarDatos() : null})
 botonLogin.addEventListener("click", guardarDatos)
