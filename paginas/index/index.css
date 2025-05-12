@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap');
-@import url(./../estilos/clases.css);
+@import url("./../../estilos/clases.css");
 
 * {
     margin: 0;
@@ -42,7 +42,7 @@ body {
             .iconJS {
                 width: 30px;
                 aspect-ratio:  1/1;
-                background-image: url(../comunes/resources/icons/icons8-javascript-50.png);
+                background-image: url(../recursos/icons/icons8-javascript-50.png);
                 background-size: cover;
                 margin-left: 6px;
             }

@@ -21,7 +21,6 @@ const validarInputs = (() => {
         }
 
         if (input.name === "repeatPass") {
-            console.log(inputs[2].value)
             if (input.value.length >= 6 && input.value === inputs[1].value) {
                 iconos[num].style.color = "var(--colorCyanApagado)"
                 iconos[num].textContent = "verified_user"
@@ -29,7 +28,7 @@ const validarInputs = (() => {
             else if (input.value.length >= 6 && input.value !== inputs[1].value) {
                 iconos[num].style.color = "rgb(230, 89, 89)" 
                 iconos[num].textContent = "gpp_bad"
-                estado = false
+                estado = false // ojo no es reduntante
             } else {
                 estado = false
                 iconos[num].style.color = "transparent"
