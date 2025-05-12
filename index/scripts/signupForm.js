@@ -21,13 +21,15 @@ const validarInputs = (() => {
         }
 
         if (input.name === "repeatPass") {
-            if (input.value.length > 5 && input.value === inputs[1].value) {
+            console.log(inputs[2].value)
+            if (input.value.length >= 6 && input.value === inputs[1].value) {
                 iconos[num].style.color = "var(--colorCyanApagado)"
                 iconos[num].textContent = "verified_user"
             } 
-            else if (input.value.length > 5 && input.value !== inputs[1].value) {
+            else if (input.value.length >= 6 && input.value !== inputs[1].value) {
                 iconos[num].style.color = "rgb(230, 89, 89)" 
                 iconos[num].textContent = "gpp_bad"
+                estado = false
             } else {
                 estado = false
                 iconos[num].style.color = "transparent"
