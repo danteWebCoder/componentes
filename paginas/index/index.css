@@ -42,7 +42,7 @@ body {
             .iconJS {
                 width: 30px;
                 aspect-ratio:  1/1;
-                background-image: url(../recursos/icons/icons8-javascript-50.png);
+                background-image: url(./../../recursos/icons/icons8-javascript-50.png);
                 background-size: cover;
                 margin-left: 6px;
             }
