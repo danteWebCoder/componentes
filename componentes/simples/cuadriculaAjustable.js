@@ -57,8 +57,8 @@ export class cuadridulaAjustable extends HTMLElement {
             const ancho = this.contenedor.offsetWidth
             const alto = this.contenedor.offsetHeight
             const filas = Math.floor(alto / this.ratio) - 1
-            const elementos = Math.floor(ancho / this.ratio) - 1
-            return [filas, elementos]
+            const columnas = Math.floor(ancho / this.ratio) - 1
+            return [filas, columnas]
         }
 
         const construirMalla = () => {
@@ -73,10 +73,11 @@ export class cuadridulaAjustable extends HTMLElement {
                     const celda = crearElemento(fila, "div", "celda")
                     celda.style.width = `${this.ratio}px`
                     celda.style.height = `${this.ratio}px`
-                    const casilla = crearElemento(celda, "div", "casilla", "casilla_" + contId, {"hor": y, "ver": x })
+                    const casilla = crearElemento(celda, "div", "casilla", "cas" + contId, {"hor": x, "ver": y })
                     contId += 1
                 }
             }
+            return this.contenedor
         }
  
         construirMalla()
