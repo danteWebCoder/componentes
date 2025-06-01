@@ -36,7 +36,7 @@ class fondoMatrix extends HTMLElement {
 
                     &:hover .subCelda {
                         text-shadow: 0 0 8px orange, 0 0 8px orange, 0 0 4px orange, 0 0 14px orange;
-                        transform: scale(400%);
+                        transform: scale(340%);
                     }
 
                     &:not(:hover) .subCelda {
@@ -47,7 +47,7 @@ class fondoMatrix extends HTMLElement {
 
                     .hoverSimulado {
                         text-shadow: 0 0 8px orange, 0 0 8px orange, 0 0 4px orange, 0 0 14px orange !important;
-                        transform: scale(400%) !important;
+                        transform: scale(340%) !important;
                         transition: .1s ease-in-out !important;
                     }
 
@@ -76,7 +76,7 @@ class fondoMatrix extends HTMLElement {
                     .charDesvanecer {
                         transform: scale(60%) !important;
                         opacity: 0;
-                        transition: .6s ease-in-out !important;
+                        transition: 1.2s ease-in-out !important;
                     }
                 }
              }
@@ -153,14 +153,27 @@ class fondoMatrix extends HTMLElement {
         }
 
         const caracteresMatrix = [
-            'ᚠ', 'ᚡ', 'ᚢ', 'ᚣ', 'ᚤ', 'ᚥ', 'ᚬ', 'ᚭ', 'ᚮ', 'ᚯ', 'ᚰ', 'ᚱ', 'ᚳ', 'ꠡ',
-            'ᚴ', 'ᚵ', 'ᚶ', 'ᚸ', 'ᚺ', 'ᚻ', 'ᚼ', 'ᚽ', 'ᚾ', 'ᚿ', 'ᛀ', 'ᛂ', 'ᛅ', 'ᛆ', 'ᛇ', 'Ⱁ', 'ꠢ', 'ꠣ',
-            'ᛈ', 'ᛉ', 'ᛊ', 'ᛋ', 'ᛐ', 'ᛑ', 'ᛒ', 'ᛓ', 'ᛔ', 'ᛗ', 'ᛘ', 'ᛙ', 'ᛚ', 'ᛛ', 'ʖ', 'ʞ', 'ᛝ', 'ᛞ',
-            'ᛟ', 'Ⰰ', 'Ⰱ', 'Ⰲ', 'Ⰳ', 'Ⰵ', 'Ⰷ', 'Ⰸ', 'Ⰹ', 'Ⰺ', 'Ⰻ', 'Ⰼ', 'Ⰽ', 'Ⰾ',
-            'Ⱄ', 'Ⱅ', 'Ⱆ', 'Ⱇ', 'Ⱈ', 'Ⱉ', 'Ⱊ', 'Ⱋ', 'Ⱌ', 'Ⱍ', 'Ⱎ', 'Ⱏ', 'Ⱐ', 'Ⱑ', 'Ⱒ', 'Ⱓ', 'Ⱔ', 'Ⱀ',
-            'Ⱖ', 'Ⱚ', 'Ⱛ', 'Ⱞ', 'Ⱟ', 'ꠁ', 'ꠃ', 'ꠄ', 'ꠅ', 'ꠇ', 'ꠈ', 'ꠉ', 'ꠊ', 'ꠌ', 'ꠍ',
-            'ꠎ', 'ꠏ', 'ꠐ', 'ꠑ', 'ꠒ', 'ꠓ', 'ꠔ', 'ꠕ', 'ꠖ', 'ꠗ', 'ꠘ', 'ꠙ', 'ꠚ', 'ꠛ', 'ꠜ', 'ꠝ', 'ꠞ', 'ꠟ', 'ꠠ'
-        ]
+            'ｦ', 'ｧ', 'ｨ', 'ｩ', 'ｪ', 'ｫ', 'ｬ', 'ｭ', 'ｮ', 'ｯ', 'ｱ', 'ｲ', 'ｳ', 'ｴ', 'ｵ', 'ｶ',
+            'ｷ', 'ｸ', 'ｹ', 'ｺ', 'ｻ', 'ｼ', 'ｽ', 'ｾ', 'ｿ', 'ﾀ', 'ﾁ', 'ﾂ', 'ﾃ', 'ﾄ', 'ﾅ', 'ﾆ',
+            'ﾇ', 'ﾈ', 'ﾉ', 'ﾊ', 'ﾋ', 'ﾌ', 'ﾍ', 'ﾎ', 'ﾏ', 'ﾐ', 'ﾑ', 'ﾒ', 'ﾓ', 'ﾔ', 'ﾕ', 'ﾖ',
+            'ﾗ', 'ﾘ', 'ﾙ', 'ﾚ', 'ﾛ', 'ﾜ', 'ﾝ', 'ヮ', 'ヿ', 'ゔ', 'ゕ', 'ゖ',
+
+            // Runas anglosajonas (Futhorc)
+            'ᚠ', 'ᚡ', 'ᚢ', 'ᚣ', 'ᚤ', 'ᚥ', 'ᚦ', 'ᚧ', 'ᚨ', 'ᚩ', 'ᚪ', 'ᚫ', 'ᚬ', 'ᚭ', 'ᚮ', 'ᚯ',
+
+            // Glagolítico
+            'Ⰰ', 'Ⰱ', 'Ⰲ', 'Ⰳ', 'Ⰴ', 'Ⰵ', 'Ⰷ', 'Ⰸ', 'Ⰹ', 'Ⰼ', 'Ⰽ',
+
+            // Fuþark joven (runas modernas)
+            'ᛒ', 'ᛖ', 'ᛗ', 'ᛚ', 'ᛜ', 'ᛞ', 'ᛟ', 'ᛝ', 'ᚱ', 'ᛃ', 'ᚻ', 'ᚾ',
+
+            // Tifinagh
+            'ⴱ', 'ⴳ', 'ⴷ', 'ⴻ', 'ⵔ', 'ⵏ', 'ⵓ', 'ⵡ', 'ⵉ', 'ⵎ', 'ⵅ', 'ⵄ', 'ⵇ',
+
+            // Deseret
+            '𐐀', '𐐁', '𐐂', '𐐅', '𐐆', '𐐇', '𐐈', '𐐉', '𐐊', '𐐋', '𐐌', '𐐍',
+
+        ];
 
         const efectoMatrix = async () => {
             const numFilas = infoCuadricula[2]
@@ -185,13 +198,12 @@ class fondoMatrix extends HTMLElement {
                         celda.textContent = caracter
 
                         if (celda === celdaAleatoria
-                            && celda !== celdasColumna[contador - 1]  // celdas anteriores
-                            && celda !== celdasColumna[contador - 2]
-                            && celda !== celdasColumna[contador - 3]
-                            && celda !== celdasColumna[contador - 4])
+                            // celdas de separacion
+                            && !celdasColumna[contador - 1].classList.contains("hoverSimulado")
+                            && !celdasColumna[contador - 2].classList.contains("hoverSimulado"))
                             celdaAleatoria.classList.add("hoverSimulado")
 
-                        retrasar(velocidad * 20, () => celdaAleatoria.classList.remove("hoverSimulado"))
+                        retrasar(velocidad * 30, () => celdaAleatoria.classList.remove("hoverSimulado"))
 
                     } else {
                         if (celdaFinColumna.classList.contains("charInsertado")) celdaFinColumna.classList.remove("charInsertado")

@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Js componentes</title>
     <link rel="stylesheet" href="./paginas/index/index.css">
-<!--     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?lofamily=Material+Symbols+Outlined"/>
-    <link rel="shortcut icon" href="./recursos/icons/icons8-javascript-50.png" type="image/x-icon">
- --></head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="shortcut icon" href="./recursos/icons/icons8-javascript-50.png" type="image/png">
+</head>
+
 <body>
     <header>
-        <div class="title">Proyecto componentes avanzados 
+        <div class="title">Proyecto componentes avanzados
             <div class="iconJS"></div>
         </div>
         <div class="login filaCentrada">
@@ -26,7 +28,9 @@
     </header>
 
     <main>
-        <fondo-matrix velocidad="50" volumen="32" tempoColumnas="600" columnasMax="6"></fondo-matrix>
+        <div class="contenedorFondoMatrix">
+            <fondo-matrix velocidad="50" volumen="32" tempoColumnas="600" columnasMax="8"></fondo-matrix>
+        </div>
 
         <form class="oculto" action="" method="get" id="signupForm">
             <span id="iconoFondoForm" class="material-symbols-outlined iconoAmpliado">sentiment_dissatisfied</span>
@@ -57,7 +61,8 @@
                         <span class="material-symbols-outlined iconoForm iconoChecked">verified_user</span>
                     </div>
                     <div class="inputFila filaCentrada">
-                        <input class="inputText" type="password" name="repeatPass" id="repeatPass" placeholder="Repite contraseña">
+                        <input class="inputText" type="password" name="repeatPass" id="repeatPass"
+                            placeholder="Repite contraseña">
                         <span class="visibilidadBox icono centrado">
                             <span class="visibilidadIcono material-symbols-outlined">visibility_off</span>
                         </span>
@@ -66,10 +71,10 @@
             </div>
             <label class="condiciones filaCentrada">
                 <div class="condicionesCheck material-symbols-outlined">
-                    <input class="inputOculto" type="checkbox" name="legal" id="legal"> 
+                    <input class="inputOculto" type="checkbox" name="legal" id="legal">
                     <span class="material-symbols-outlined iconoCheck">check_small</span>
                 </div>
-                Acepto las 
+                Acepto las
                 <a class="enlaceCondiciones" href="./paginas/legal/legal.html">&nbsp;condiciones</a>
             </label>
             <div class="botones espaciadoHorizontal">
@@ -84,4 +89,5 @@
     <script src="./paginas/index/scripts/signupForm.js"></script>
     <script type="module" src="./componentes/simples/fondoMatrix.js"></script>
 </body>
+
 </html>
