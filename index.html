@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
+    <link rel="stylesheet" href="./pages/login/login_main.css">
+    <title>Login</title>
+</head>
+
+<body class="centrado">
+    <div class="formOutline centrado">
+        <div class="formBox">
+            <div class="formImg"></div>
+
+            <form class="form verticalCentradoEspaciado">
+                <div class="opciones">
+                    <span class="opcForm centrado">Entrar con mi usuario
+                        <input class="inputOculto" type="radio" name="opcForm" id="" checked>
+                    </span>
+                    <span class="opcForm centrado">Crear una cuenta nueva
+                        <input class="inputOculto" type="radio" name="opcForm" id="">
+                    </span>
+                </div>
+                <div class="campos verticalCentrado">
+                    <span class="camposBox">
+                        <input class="camposForm" type="text" id="nombre" placeholder="Usuario...">
+                    </span>
+                    <span class="camposBox">
+                        <input class="camposForm" type="password" id="password" placeholder="Contraseña...">
+                    </span>
+                    <span class="camposBox repetirPass">
+                        <input class="camposForm" type="password" id="passwordConfirmed"
+                            placeholder="Repite la contraseña...">
+                    </span>
+                    <span class="noRecuerda">No recuerdo mi contraseña de acceso
+                        <span class="enfasis material-symbols-outlined">touch_app</span></span>
+                </div>
+                <div class="concicionesBox">
+                    <span class="checkFalso"><span class="checkIcon material-symbols-outlined"></span></span>
+                    <span class="condiciones">Acepto las condiciones de uso</span>
+                    <input class="inputOculto" type="checkbox" name="condiciones" id="condiciones">
+                </div>
+                <button class="botonLogin" type="submit" disabled>Entrar</button>
+            </form>
+
+        </div>
+    </div>
+</body>
+
+</html>

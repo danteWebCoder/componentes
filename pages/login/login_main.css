@@ -1,0 +1,177 @@
+@import url("./../../app_styles/clases.css");
+@import url("./../../app_styles/fuentes.css");
+
+:root {
+    --fondoInput: rgba(255, 255, 255, 0.1);
+    --blancoDesactivado: rgba(230, 230, 230, 0.6);
+    --blancoActivado: rgb(230, 230, 230);
+    --inputFondo: rgba(255, 255, 255, 0.205);
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    user-select: none;
+    font-family: "Anta";
+    color: var(--blancoDesactivado);
+    font-size: 14px;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+
+    .formOutline {
+        --formPadding: 14px;
+
+        width: 900px;
+        height: 600px;
+        padding: var(--formPadding);
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: var(--formPadding);
+
+        .formBox {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            border-radius: calc(var(--formPadding) / 1.6);
+            overflow: hidden;
+
+            .formImg {
+                width: 100%;
+                height: 100%;
+                background-image: url("https://i.redd.it/a4e8d3lz5ptc1.jpeg");
+                background-position: center;
+                background-size: 120%;
+            }
+
+            .form {
+                position: absolute;
+                right: 0;
+                width: 45%;
+                height: 100%;
+                background-color: rgb(0, 0, 0, 0.4);
+                padding: 30px;
+                transition: right 1s ease-in-out;
+
+                .opciones {
+                    width: 90%;
+                    height: 60px;
+
+                    .opcForm {
+                        position: relative;
+                        width: 100%;
+                        height: 30px;
+                        text-align: center;
+                    }
+
+                    .opcForm:has(.inputOculto:checked) {
+                        font-size: 24px;
+                        color: var(--blancoActivado);
+                    }
+                }
+
+                .campos {
+                    width: 100%;
+                    height: 245px;
+
+                    .camposBox {
+                        width: 100%;
+                        height: 40px;
+                        background-color: var(--inputFondo);
+                        border-radius: 4px;
+                        padding: 8px;
+                        backdrop-filter: blur(4px);
+
+                        &:not(:first-of-type) {
+                            margin-top: 60px;
+                        }
+
+                        .camposForm {
+                            all: unset;
+                            width: calc(100% - 40px);
+                            height: 100%;
+                            color: var(--blancoActivado);
+                            padding-left: 18px;
+
+                            &::placeholder {
+                                font-size: 16px;
+                            }
+                        }
+                    }
+
+                    .repetirPass {
+                        display: none;
+                    }
+
+                    .noRecuerda {
+                        display: none;
+                        margin-top: 10px;
+                        font-size: 12px;
+                        cursor: pointer;
+
+                        .enfasis {
+                            position: relative;
+                            top: 8px;
+                            margin-left: 8px;
+                        }
+                    }
+                }
+
+                .concicionesBox {
+                    position: relative;
+                    top: 20px;
+                    display: flex;
+                    cursor: pointer;
+
+                    .checkFalso {
+                        position: relative;
+                        top: -2px;
+                        width: 18px;
+                        height: 18px;
+                        border: 1px solid grey;
+                        border-radius: 4px;
+                        margin-right: 12px;
+                    }
+
+                    .condiciones {
+                        font-size: 12px;
+                    }
+
+                    &:has(.inputOculto:checked) .checkFalso .checkIcon::after {
+                        position: relative;
+                        top: -7px;
+                        font-size: 18px;
+                        content: "check";
+                        vertical-align: center;
+                    }
+                }
+
+                .botonLogin {
+                    border: none;
+                    width: 120px;
+                    height: 40px;
+                    background-color: var(--blancoDesactivado);
+                    border-radius: 4px;
+                    color: var(--blancoActivado);
+                    font-size: 18px;
+                    cursor: pointer;
+
+                    &:disabled {
+                        cursor: auto;
+                    }
+                }
+            }
+
+            .form:has(.opciones .opcForm:last-of-type .inputOculto:checked) .campos .repetirPass {
+                display: block;
+            }
+
+            .form:has(.opciones .opcForm:last-of-type .inputOculto:not(:checked)) .campos .noRecuerda {
+                display: block;
+            }
+        }
+    }
+}
