@@ -11,28 +11,27 @@
 
 <body class="centrado">
     <div class="formOutline centrado">
-        <div class="formBox">
-            <div class="formImg"></div>
+        <fieldset class="formBox">
+            <div class="formImg"></div> <!-- incluir cita -->
 
-            <form class="form verticalCentradoEspaciado">
+            <form class="form verticalCentradoEspaciado" id="form" method="get">
                 <div class="opciones">
                     <span class="opcForm centrado">Entrar con mi usuario
-                        <input class="inputOculto" type="radio" name="opcForm" id="" checked>
+                        <input class="inputOculto" type="radio" name="tipo" value="login" checked>
                     </span>
                     <span class="opcForm centrado">Crear una cuenta nueva
-                        <input class="inputOculto" type="radio" name="opcForm" id="">
+                        <input class="inputOculto" type="radio" name="tipo" value="signUp">
                     </span>
                 </div>
                 <div class="campos verticalCentrado">
                     <span class="camposBox">
-                        <input class="camposForm" type="text" id="nombre" placeholder="Usuario...">
+                        <input class="camposForm" id="user" type="text" name="user" placeholder="Usuario...">
                     </span>
                     <span class="camposBox">
-                        <input class="camposForm" type="password" id="password" placeholder="Contraseña...">
+                        <input class="camposForm" id="password" type="password" name="password" placeholder="Contraseña...">
                     </span>
                     <span class="camposBox repetirPass">
-                        <input class="camposForm" type="password" id="passwordConfirmed"
-                            placeholder="Repite la contraseña...">
+                        <input class="camposForm" id="passwordConfirmed" type="password" placeholder="Repite la contraseña...">
                     </span>
                     <span class="noRecuerda">No recuerdo mi contraseña de acceso
                         <span class="enfasis material-symbols-outlined">touch_app</span></span>
@@ -40,13 +39,13 @@
                 <div class="concicionesBox">
                     <span class="checkFalso"><span class="checkIcon material-symbols-outlined"></span></span>
                     <span class="condiciones">Acepto las condiciones de uso</span>
-                    <input class="inputOculto" type="checkbox" name="condiciones" id="condiciones">
+                    <input class="inputOculto" type="checkbox" id="condiciones">
                 </div>
-                <button class="botonLogin" type="submit" disabled>Entrar</button>
+                <button id="botonLogin" class="botonLogin" type="submit" disabled>Entrar</button>
             </form>
-
-        </div>
+        </fieldset>
     </div>
+    <script src="./pages/login/validacionForm.js"></script>
 </body>
 
 </html>

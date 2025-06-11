@@ -2,10 +2,10 @@
 @import url("./../../app_styles/fuentes.css");
 
 :root {
-    --fondoInput: rgba(255, 255, 255, 0.1);
     --blancoDesactivado: rgba(230, 230, 230, 0.6);
     --blancoActivado: rgb(230, 230, 230);
-    --inputFondo: rgba(255, 255, 255, 0.205);
+    --elementoDesactivado: rgba(255, 255, 255, 0.2);
+    --formPadding: 14px;
 }
 
 * {
@@ -16,6 +16,7 @@
     font-family: "Anta";
     color: var(--blancoDesactivado);
     font-size: 14px;
+    list-style: none;
 }
 
 body {
@@ -23,9 +24,7 @@ body {
     height: 100vh;
 
     .formOutline {
-        --formPadding: 14px;
-
-        width: 900px;
+        width: 1000px;
         height: 600px;
         padding: var(--formPadding);
         background-color: rgba(0, 0, 0, 0.1);
@@ -36,6 +35,8 @@ body {
             width: 100%;
             height: 100%;
             display: flex;
+            border: none;
+            /* efecto indeseado del fieldset */
             border-radius: calc(var(--formPadding) / 1.6);
             overflow: hidden;
 
@@ -44,15 +45,16 @@ body {
                 height: 100%;
                 background-image: url("https://i.redd.it/a4e8d3lz5ptc1.jpeg");
                 background-position: center;
-                background-size: 120%;
+                background-size: cover;
             }
 
             .form {
                 position: absolute;
                 right: 0;
-                width: 45%;
+                width: 40%;
                 height: 100%;
                 background-color: rgb(0, 0, 0, 0.4);
+                border-left: 1px solid rgba(255, 255, 255, 0.514);
                 padding: 30px;
                 transition: right 1s ease-in-out;
 
@@ -78,12 +80,12 @@ body {
                     height: 245px;
 
                     .camposBox {
-                        width: 100%;
+                        width: 86%;
                         height: 40px;
-                        background-color: var(--inputFondo);
+                        background-color: var(--elementoDesactivado);
+                        backdrop-filter: blur(4px);
                         border-radius: 4px;
                         padding: 8px;
-                        backdrop-filter: blur(4px);
 
                         &:not(:first-of-type) {
                             margin-top: 60px;
@@ -143,6 +145,7 @@ body {
                     &:has(.inputOculto:checked) .checkFalso .checkIcon::after {
                         position: relative;
                         top: -7px;
+                        left: -1px;
                         font-size: 18px;
                         content: "check";
                         vertical-align: center;
@@ -160,6 +163,8 @@ body {
                     cursor: pointer;
 
                     &:disabled {
+                        background-color: var(--elementoDesactivado);
+                        color: var(--blancoDesactivado);
                         cursor: auto;
                     }
                 }
