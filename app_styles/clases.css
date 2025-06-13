@@ -5,6 +5,29 @@
     align-items: center;
 }
 
+.verIzqEspaciado {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.verCenEspaciado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.verDerEspaciado {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+/*  */
+
 .verticalCentrado {
     display: flex;
     flex-direction: column;
@@ -17,6 +40,7 @@
     align-items: center;
     justify-content: space-between;
 }
+
 
 .horizontalEspaciado {
     display: flex;
