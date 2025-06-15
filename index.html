@@ -5,31 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
-    <link rel="stylesheet" href="./pages/login/login_main.css">
-    <link rel="stylesheet" href="./app_styles/desarrollo.css">
+    <link rel="stylesheet" href="./app/paginas/landing/landing_main.css">
+    <link rel="stylesheet" href="./app/comunes/css/desarrollo.css">
     <title>Login</title>
 </head>
 
 <body>
-
     <div class="fondoBlanco"></div>
     <div class="landingBox">
         <div class="titulos verIzqEspaciado">
-            <span class="logoBox BORDEGRIS"></span>
+            <div class="logoBox">
+                <div class="fondo3d centrado">
+                    <span class="marco3d">
+                        <span class="logoTexto centrado">Dante</span>
+                        <span class="logoTexto centrado">Dante</span>
+                    </span>
+                </div>
+
+            </div>
             <span class="principal verIzqEspaciado">PROYECTO COMPONENTES AVANZADOS
                 <p class="secundario">La felicidad de tu vida depende de la calidad de tus pensamientos...</p>
             </span>
-            <span class="botonInicio centrado">Comenzar</span>
+            <div class="inicioBox">
+                <span class="botonInicio centrado">Comenzar</span>
+            </div>
         </div>
         <div class="hardware">
-            <img src="./46359(2).png" alt="">
-        </div>
+            <img src="./app/recursos/imagenes/landing_responsive.png" alt="">
+            <div class="capaImg1"></div>
+<!--             <img src="https://logowik.com/content/uploads/images/web-components7396.logowik.com.webp" alt="">
+ -->        </div>
         <div class="info"></div>
     </div>
 
     <div class="formOutline centrado">
         <fieldset class="formBox">
-            <div class="formImg"></div> <!-- incluir cita -->
+            <div class="formImg"></div>
 
             <form class="form verticalCentradoEspaciado" id="form" method="get">
                 <div class="opciones">
@@ -64,7 +75,7 @@
             </form>
         </fieldset>
     </div>
-    <script src="./pages/login/validacionForm.js"></script>
+    <script src="./app/paginas/landing/validacionForm.js"></script>
 </body>
 
 </html>
