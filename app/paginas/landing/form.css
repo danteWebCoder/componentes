@@ -6,6 +6,7 @@
     --blancoForm: rgba(255, 255, 255, .8);
     --colorInputText: rgba(0, 0, 0, 0.521);
     --transicionGeneral: .1s;
+    --transicionModal: .5s;
 }
 
 .modalMin {
@@ -109,6 +110,7 @@
                 }
 
                 .iconoInput {
+                    width: 20px;
                     color: grey;
 
                     &:hover {
@@ -204,10 +206,16 @@
                 color: var(--colorTextoBotonAct);
             }
 
+            .botonLogin {
+                pointer-events: none;
+                cursor: auto;
+            }
+
             .botonLogin:enabled {
                 background-color: var(--colorBotonAct);
                 color: var(--colorTextoBotonAct);
-                cursor: auto;
+                pointer-events: auto;
+                cursor: pointer;
             }
         }
     }

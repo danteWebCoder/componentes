@@ -1,50 +1,100 @@
-const botonInicio = document.getElementById("botonInicio")
-const formulario = document.getElementById("modalForm")
-const cerrar = document.getElementById("cerrarForm")
+const modalAbrirCerrar = () => {
+    const modal = document.getElementById("modalForm")
+    const visible = modal.classList.contains("modalMin")
 
-const formTipo = Array.from(document.querySelectorAll("form .tipos .inputOculto"))
-const enviar = document.getElementById("botonLogin")
-const usuario = document.getElementById("user")
-const password = document.getElementById("password")
-const passwordConfirmed = document.getElementById("passwordConfirmed")
-const condiciones = document.getElementById("condiciones")
-
-
-console.log(enviar)
-const abrirForm = () => {
-    botonInicio.style.pointerEvents = "none";
-    formulario.classList.replace("modalMin", "modalMax")
-}
-
-const cerrarForm = () => {
-    botonInicio.style.pointerEvents = "auto";
-    formulario.classList.replace("modalMax", "modalMin")
-}
-
-const verificarForm = () => {
-    let datosOk = true
-    const form = formTipo.find(item => item.checked).value
-
-    if (usuario.value.length <= 4) datosOk = false
-    if (password.value.length <= 4) datosOk = false
-    if (!condiciones.checked) datosOk = false
-    if (form === "signUp") {
-        passwordConfirmed.name = "passwordConfirmed"
-        if (passwordConfirmed.value !== password.value) datosOk = false
+    if (visible) {
+        botonInicio.style.pointerEvents = "none";
+        modal.classList.replace("modalMin", "modalMax")
     } else {
-        passwordConfirmed.removeAttribute("name")
+        botonInicio.style.pointerEvents = "auto";
+        modal.classList.replace("modalMax", "modalMin")
+    }
+}
+
+const activarIconosInput = (item) => {
+    if (item.value.length > 0 && item.nextElementSibling) {
+        item.nextElementSibling.textContent = "visibility"
+    } else if (item.nextElementSibling) {
+        item.nextElementSibling.textContent = ""
+    }
+}
+
+const cambiarVisibilidad = (item) => {
+    const input = item.previousElementSibling
+    input.type = input.type === "password" ? "text" : "password"
+    cambiarIconos(item)
+}
+
+const cambiarIconos = (item) => {
+    item.textContent = item.textContent === "visibility" ? "visibility_off" : "visibility"
+}
+
+const restablecerIconos = (item) => {
+    const icono = item.nextElementSibling
+    if (icono && item.value.length === 0) {
+        icono.textContent = ""
+        icono.previousElementSibling.type = "password"
+    }
+}
+
+const verificarForm = (inputs) => {
+    const enviar = document.getElementById("botonLogin")
+    const tipo = inputs.find(item => item.name === "tipo" && item.checked).value
+    let datosOk = true
+
+    if (inputs[0].value.length <= 4) datosOk = false
+    if (inputs[1].value.length <= 4) datosOk = false
+    if (!inputs[3].checked) datosOk = false
+
+    // activar el name del input para el envio
+    if (tipo === "signUp") {
+        console.log("signUp")
+        if (inputs[2].value !== inputs[1].value) {
+            datosOk = false
+            inputs[2].name = "passwordConfirmed"
+        }
+    } else {
+        inputs[2].removeAttribute("name")
     }
 
     enviar.disabled = datosOk ? false : true
 }
 
 const main = () => {
-    botonInicio.addEventListener("click", abrirForm)
-    cerrar.addEventListener("click", cerrarForm)
-    verificarForm()
-    formTipo.forEach((item) => { item.addEventListener("change", verificarForm) }); // ojo punto y coma al empezar linea con array
-    [usuario, password, passwordConfirmed].forEach((item) => { item.addEventListener("input", verificarForm) })
-    condiciones.addEventListener("change", verificarForm)
+    const abrir = document.getElementById("botonInicio")
+    const cerrar = document.getElementById("cerrarForm")
+    const campos = Array.from(document.querySelectorAll("form .campos .cajaInput input"))
+    const tipoForm = Array.from(document.querySelectorAll("form .cajaTipos .inputOculto"))
+    const inputs = [...campos, document.getElementById("condiciones"), ...tipoForm]
+    const iconosVisivilidad = Array.from(document.querySelectorAll(".iconoInput"))
+
+    verificarForm(inputs)
+
+        // punto coma forEach desde array directo
+        ;[abrir, cerrar].forEach(item => {
+            item.addEventListener("click", () => {
+                modalAbrirCerrar()
+                verificarForm(inputs)
+            })
+        })
+
+    inputs.forEach(item => {
+        item.addEventListener("input", () => {
+            verificarForm(inputs)
+            activarIconosInput(item)
+            restablecerIconos(item)
+        })
+    })
+
+    tipoForm.forEach(item => {
+        item.addEventListener("change", () => verificarForm(inputs))
+    })
+
+    iconosVisivilidad.forEach(item => {
+        item.addEventListener("click", () => {
+            cambiarVisibilidad(item)
+        })
+    })
 }
 
 main()
