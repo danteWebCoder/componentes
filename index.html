@@ -5,77 +5,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
-    <link rel="stylesheet" href="./app/paginas/landing/landing_main.css">
+    <link rel="stylesheet" href="./app/paginas/landing/index.css">
+    <link rel="stylesheet" href="./app/paginas/landing/form.css">
+
     <link rel="stylesheet" href="./app/comunes/css/desarrollo.css">
     <title>Login</title>
 </head>
 
-<body>
+<body class="relativo">
     <div class="fondoBlanco"></div>
     <div class="landingBox">
         <div class="titulos verIzqEspaciado">
-            <div class="logoBox">
-                <div class="fondo3d centrado">
-                    <span class="marco3d">
-                        <span class="logoTexto centrado">Dante</span>
-                        <span class="logoTexto centrado">Dante</span>
-                    </span>
-                </div>
-
-            </div>
+            <div id="logo_CC" class="logo_CC BORDEROJO"></div>
             <span class="principal verIzqEspaciado">PROYECTO COMPONENTES AVANZADOS
                 <p class="secundario">La felicidad de tu vida depende de la calidad de tus pensamientos...</p>
             </span>
-            <div class="inicioBox">
-                <span class="botonInicio centrado">Comenzar</span>
+            <div class="botonInicioCaja">
+                <span id="botonInicio" class="botonInicio centrado">Comenzar</span>
             </div>
         </div>
         <div class="hardware">
-            <img src="./app/recursos/imagenes/landing_responsive.png" alt="">
-            <div class="capaImg1"></div>
-<!--             <img src="https://logowik.com/content/uploads/images/web-components7396.logowik.com.webp" alt="">
- -->        </div>
+            <img src="./app/comunes/recursos/imagenes/landing_responsive.png" alt="">
+            <div class="capa1 simbolos_CC centrado BORDEROJO"></div>
+            <div class="capa2 simbolos_CC centrado BORDEROJO"></div>
+            <div class="capa3 simbolos_CC centrado BORDEROJO"></div>
+        </div>
         <div class="info"></div>
     </div>
 
-    <div class="formOutline centrado">
-        <fieldset class="formBox">
-            <div class="formImg"></div>
+    <div id="modalForm" class="modalMin absoluto max centrado">
 
-            <form class="form verticalCentradoEspaciado" id="form" method="get">
-                <div class="opciones">
-                    <span class="opcForm centrado">Entrar con mi usuario
+        <div class="cajaForm centrado relativo">
+            <div id="cerrarForm" class="cerrar centrado absoluto">
+                <span class="icono material-symbols-outlined ">close</span>
+            </div>
+            
+            <form action="" method="get" class="relativo verCenEspaciado">
+
+                <section class="cajaTipos verCenEspaciado">
+                    <span class="tipos horAbajo relativo">
+                        Acceder con mis datos
                         <input class="inputOculto" type="radio" name="tipo" value="login" checked>
                     </span>
-                    <span class="opcForm centrado">Crear una cuenta nueva
-                        <input class="inputOculto" type="radio" name="tipo" value="signUp">
+                    <span class="tipos horAbajo relativo">
+                        Crear una cuenta nueva
+                        <input class="inputOculto" type="radio" name="tipo" value="login">
                     </span>
-                </div>
-                <div class="campos verticalCentrado">
-                    <span class="camposBox">
-                        <input class="camposForm" id="user" type="text" name="user" placeholder="Usuario...">
+                </section>
+
+                <section class="campos verCen">
+                    <span class="cajaInput">
+                        <input class="campo" id="user" type="text" name="user" placeholder="Usuario...">
                     </span>
-                    <span class="camposBox">
-                        <input class="camposForm" id="password" type="password" name="password"
-                            placeholder="Contraseña...">
+                    <span class="cajaInput">
+                        <input class="campo" id="password" type="password" name="password" placeholder="Contraseña...">
+                        <span class="iconoInput material-symbols-outlined"></span>
                     </span>
-                    <span class="camposBox repetirPass">
-                        <input class="camposForm" id="passwordConfirmed" type="password"
-                            placeholder="Repite la contraseña...">
+                    <span class="cajaInput repetirPass">
+                        <input class="campo" id="passwordConfirmed" type="password" placeholder="Repite la contraseña...">
+                        <span class="iconoInput material-symbols-outlined"></span>
                     </span>
                     <span class="noRecuerda">No recuerdo mi contraseña de acceso
-                        <span class="enfasis material-symbols-outlined">touch_app</span></span>
-                </div>
-                <div class="concicionesBox">
-                    <span class="checkFalso"><span class="checkIcon material-symbols-outlined"></span></span>
-                    <span class="condiciones">Acepto las condiciones de uso</span>
-                    <input class="inputOculto" type="checkbox" id="condiciones">
-                </div>
-                <button id="botonLogin" class="botonLogin" type="submit" disabled>Entrar</button>
+                        <span class="iconoForm material-symbols-outlined">touch_app</span>
+                    </span>
+                </section>
+
+                <section class="confirmar centrado borderGrisR4">
+                    <div class="cajaCondiciones horCenEspaciado relativo">
+                        <span class="check centrado material-symbols-outlined"></span>
+                        <span class="condiciones">Acepto las condiciones de uso</span>
+                        <input class="inputOculto" type="checkbox" id="condiciones">
+                    </div>
+                </section>
+
+                <section class="enviar horCenEspaciado borderGrisR4">
+                    <button class="reset botonForm" type="reset">Reset</button>
+                    <button id="botonLogin" class="botonLogin  botonForm" type="submit" disabled>Entrar</button>
+                </section>
+
             </form>
-        </fieldset>
-    </div>
-    <script src="./app/paginas/landing/validacionForm.js"></script>
+        </div>
+
+
+        <!--     <script src="./app/componentes/clases/simbolos_CC.js" type="module"></script>
+ -->
+        <script src="./app/paginas/landing/formulario.js"></script>
 </body>
 
 </html>

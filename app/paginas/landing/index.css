@@ -4,8 +4,11 @@
 :root {
     --blancoDesactivado: rgba(230, 230, 230, 0.6);
     --blancoActivado: rgb(230, 230, 230);
+    --colorBotonAct: rgba(255, 255, 255, 0.8);
+    --colorBotonDes: rgba(255, 255, 255, 0.2);
+    --colorTextoBotonAct: grey;
+    --colorTextoBotonDes: rgba(255, 255, 255, 0.6);
     --elementoDesactivado: rgba(255, 255, 255, 0.2);
-    --formPadding: 14px;
 }
 
 * {
@@ -36,8 +39,6 @@ body {
     .landingBox {
         grid-column: 5 / 17;
         grid-row: 2 / 12;
-        width: 100%;
-        height: 100%;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: repeat(20, 1fr);
@@ -45,58 +46,6 @@ body {
         .titulos {
             grid-column: 1 / 3;
             grid-row: 1 / 14;
-
-            .logoBox {
-                width: 60%;
-                height: 24%;
-                perspective: 800px;
-
-                .fondo3d {
-                    width: 100%;
-                    height: 100%;
-                    border: 1px solid rgba(100, 100, 100, 0.3);
-                    transform-style: preserve-3d;
-                    transition: 1s ease-in-out;
-
-                    .marco3d {
-                        position: relative;
-                        display: flex;
-                        width: calc(100% - 20px);
-                        height: calc(100% - 20px);
-                        border: 1px solid rgba(100, 100, 100, 0.3);
-                        transform-style: preserve-3d;
-
-                        transform: translateZ(50px);
-                        transition: 1s ease-in-out;
-
-                        .logoTexto {
-                            position: absolute;
-                            display: flex;
-                            width: 100%;
-                            height: 100%;
-                            font-size: 30px;
-                            transition: 1s ease-in-out;
-                        }
-                    }
-                }
-
-                &:hover .fondo3d {
-                    transform: rotateY(40deg);
-
-                    .logoTexto {
-
-                        &:first-of-type {
-                            transform: translateZ(10px);
-                            opacity: .2;
-                        }
-
-                        &:last-of-type {
-                            transform: translateZ(80px);
-                            opacity: 1;
-                        }
-                    }
-                }
-            }
         }
 
         .principal {
@@ -111,80 +60,83 @@ body {
             }
         }
 
-        .inicioBox {
+        .botonInicioCaja {
             width: 80%;
             height: 40px;
 
             .botonInicio {
-                width: clamp(6.25rem, 2.1739rem + 6.5217vw, 10rem);
+                width: 120px;
                 height: 40px;
                 border-radius: 4px;
-                font-size: clamp(0.75rem, 0.3424rem + 0.6522vw, 1.125rem);
-                background-color: rgb(65, 65, 65);
+                background-color: var(--colorBotonDes);
                 font-size: 14px;
-                color: var(--blancoDesactivado);
+                letter-spacing: 2px;
+                color: var(--colorTextoBotonDes);
                 cursor: pointer;
                 transition: .1s;
 
                 &:hover {
-                    background-color: white;
+                    background-color: var(--colorBotonAct);
+                    color: var(--colorTextoBotonAct);
                     color: grey;
                 }
             }
         }
-    }
 
-    .hardware {
-        position: relative;
-        grid-column: 3 / 5;
-        grid-row: 1 / 15;
+        .hardware {
+            position: relative;
+            grid-column: 3 / 5;
+            grid-row: 1 / 15;
 
-        img {
-            position: absolute;
-            bottom: -2.4vw;
-            width: 100%;
+            img,
+            .capa1,
+            .capa2,
+            .capa3 {
+                position: absolute;
+            }
+
+            img {
+                bottom: -2.4vw;
+                width: 100%;
+            }
+
+            .capa1 {
+                left: .46vw;
+                bottom: 6.4vw;
+                width: 16.9vw;
+                height: 9vw;
+            }
+
+            .capa2 {
+                left: 10.9vw;
+                bottom: .4vw;
+                width: 13.3vw;
+                height: 8.9vw;
+            }
+
+            .capa3 {
+                left: 24.2vw;
+                bottom: -1.5vw;
+                width: 5.6vw;
+                height: 8vw;
+            }
         }
 
-        .capaImg1 {
-            position: absolute;
-            left: .46vw;
-            bottom: 13.4vh;
-            width: 16.9vw;
-            height: 18.8vh;
-            border: 1px solid red;
+        .info {
+            grid-column: 1 / 6;
+            grid-row: 15 / 21;
         }
-    }
-
-    .info {
-        grid-column: 1 / 6;
-        grid-row: 15 / 21;
     }
 }
 
-.formOutline {
-    display: none;
-
-    width: 100%;
-    height: 100%;
-    padding: var(--formPadding);
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: var(--formPadding);
-    grid-column: 5 / 17;
-    grid-row: 3 / 11;
-
-    .formBox {
+/*     .formBox {
         position: relative;
-        width: 100%;
-        height: 100%;
         display: flex;
         border: none;
-        /* efecto indeseado del fieldset */
         border-radius: calc(var(--formPadding) / 1.6);
         overflow: hidden;
 
         .formImg {
-            width: 100%;
-            height: 100%;
             background-image: url("https://i.redd.it/a4e8d3lz5ptc1.jpeg");
             background-position: center;
             background-size: cover;
@@ -193,15 +145,26 @@ body {
         .form {
             position: absolute;
             right: 0;
-            width: 40%;
+            width: 400px;
             height: 100%;
             background-color: rgb(0, 0, 0, 0.4);
             border-left: 1px solid rgba(255, 255, 255, 0.514);
             padding: 30px;
             transition: right 1s ease-in-out;
 
+            .cerrar {
+                top: 30;
+                right: 30px;
+                width: 30px;
+                height: 30px;
+
+                .iconoForm {
+                    color: var(--elementoDesactivado);
+                }
+            }
+
             .opciones {
-                width: 90%;
+                width: 80%;
                 height: 60px;
 
                 .opcForm {
@@ -264,7 +227,7 @@ body {
                 }
             }
 
-            .concicionesBox {
+            .condicionesBox {
                 position: relative;
                 top: 20px;
                 display: flex;
@@ -319,6 +282,4 @@ body {
         .form:has(.opciones .opcForm:last-of-type .inputOculto:not(:checked)) .campos .noRecuerda {
             display: block;
         }
-    }
-}
-}
+    } */
