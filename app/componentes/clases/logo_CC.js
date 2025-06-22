@@ -11,7 +11,9 @@ const fuente = "Anta"
 
 dom.innerHTML = `
         <div class="caja">
-            <div class="caja3D">
+            <div class="caja3d">
+                <div class="cajaFondo"></div>
+
                 <div class="capa">
                     <div class="marco"></div>
                     <div class="separador"></div>
@@ -45,33 +47,39 @@ estilo.textContent = `
         height: 100%;
         perspective: 1000px;
 
-        &:hover > .caja3D {
-            transform: rotateY(50deg);
-            background-position: right; 
+        &:hover > .caja3d .cajaFondo {transform: rotateY(50deg); background-position: right;}
 
-            .capa {
-                .separador {box-shadow: 0 0 12px rgb(255, 0, 128), 0 0 12px rgb(255, 0, 128);}
-                .circulo {box-shadow: 0 0 12px rgb(255, 0, 128), inset 0 0 12px rgb(255, 0, 128);}
-            }
+        &:hover > .caja3d .capa {
+            transform: rotateY(50deg) translateZ(2px);
+
+            .separador {box-shadow: 0 0 12px rgb(255, 0, 128), 0 0 12px rgb(255, 0, 128);}
+            .circulo {box-shadow: 0 0 12px rgb(255, 0, 128), inset 0 0 12px rgb(255, 0, 128);}
         }
 
-        .caja3D {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .caja3d {
             width: 100%;
             height: 100%;
             transform-style: preserve-3d;
-            border-radius: 8px;
-            background-image: url(${urlFondo});
-            background-size: 200%;
-            background-position: left;
-            background-repeat: no-repeat;
-            transition: var(--transicion);
+
+            .cajaFondo {
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                border-radius: 8px;
+                background-image: url(${urlFondo});
+                background-size: 200%;
+                background-position: left;
+                background-repeat: no-repeat;
+                transition: var(--transicion);
+            }
 
             .capa {
-                position: relative;
-                display: flex;
+                position: absolute;
+/*                 z-index: 2;
+ */                display: flex;
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
@@ -79,6 +87,7 @@ estilo.textContent = `
                 height: 100%;
                 perspective: 1000px;
                 transform-style: preserve-3d;
+                transform: translateZ(2px);  /* correccion de 2px para no pisar las capas */
                 transition: var(--transicion);
 
                 .texto {
@@ -113,10 +122,9 @@ estilo.textContent = `
                     position: absolute;
                     width: 100%;
                     height: 100%;
-                    border: 8px solid rgba(255, 255, 255, 0.16);
-                    outline: 2px solid rgba(255, 255, 255, 0.2);
-                    border-radius: 8px;
-                    filter: blur(1px);
+                    border: 12px solid rgba(255, 255, 255, 0.16);
+/*                     outline: 2px solid rgba(255, 255, 255, 0.2);
+ */                    border-radius: 8px;
                 }
             }
         }

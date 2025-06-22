@@ -7,31 +7,60 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
     <link rel="stylesheet" href="./app/paginas/landing/index.css">
     <link rel="stylesheet" href="./app/paginas/landing/form.css">
-
     <link rel="stylesheet" href="./app/comunes/css/desarrollo.css">
     <title>Login</title>
 </head>
 
 <body class="relativo">
-    <div class="fondoBlanco"></div>
-    <div class="landingBox">
-        <div class="titulos verIzqEspaciado">
-            <div id="logo_CC" class="logo_CC logo "></div>
-            <h1 class="principal verIzq">PROYECTO COMPONENTES AVANZADOS
-                <p class="secundario">La felicidad de tu vida depende de la calidad de tus pensamientos...</p>
-            </h1>
-            <div class="botonInicioCaja">
-                <span id="botonInicio" class="botonInicio centrado">Comenzar</span>
-            </div>
-        </div>
-        <div class="hardware">
+    <header horCen>
+        <nav class="absoluto horCenEspaciado">
+            <span id="login" class="opcionNav centrado relativo">Entrar</span>
+            <span id="proyectos" class="opcionNav centrado relativo">Proyectos</span>
+            <span id="idiomas" class="opcionNav centrado relativo idiomas">Idioma
+                <ul id="cajaIdiomas" class="cajaIdiomas absoluto horCenEspaciado borderGrisR4">
+                    <li id="es" class="idioma centrado relativo">Español</li>
+                    <li id="en" class="idioma centrado relativo">Ingles</li>
+                    <li id="eu" class="idioma centrado relativo">Euskera</li>
+                </ul>
+            </span>
+            <span id="personal" class="opcionNav centrado relativo">Sobre mi</span>
+        </nav>
+    </header>
+
+    <div class="cajaBienvenida">
+
+        <section class="titulo verCenAround centrado">
+            <h1 class="auto">PROYECTO COMPONENTES AVANZADOS</h1>
+            <q class="texto auto">La felicidad de tu vida depende de la calidad de tus pensamientos...</q>
+            <span>Marco Aurelio</span>
+        </section>
+
+        <section class="descripcion verIzqAround">
+            <p>Este es un proyecto personal basado tanto en componentes web como en componentes de interfaz.</p>
+            <p>Su objetivo principal es servir como repositorio visual y demo de mi propio trabajo. Se han invertido
+                muchas horas
+                en su desarrollo de las cuales una gran parte han sido invertidas en investigacion, auto formación y
+                desarrollo.</p>
+        </section>
+
+        <section class="botonInicioCaja">
+            <span id="botonInicio" class="botonInicio centrado">Comenzar</span>
+        </section>
+
+        <section class="hardware">
             <img class="pantallas" src="./app/comunes/recursos/imagenes/landing_responsive.png" alt="">
             <div class="capa1 fondoPantallas simbolos_CC centrado"></div>
             <div class="capa2 fondoPantallas simbolos_CC centrado"></div>
             <div class="capa3 fondoPantallas simbolos_CC centrado"></div>
-        </div>
-        <div class="info"></div>
+        </section>
+
     </div>
+
+    <footer class="centrado">
+        <div class="cajaFlexCentrada">
+            <div id="logo_CC" class="logo_CC"></div>
+        </div>
+    </footer>
 
     <div id="modalForm" class="modalMin absoluto max centrado">
 
@@ -86,10 +115,11 @@
 
             </form>
         </div>
+    </div>
 
-
-        <script src="./app/componentes/clases/logo_CC.js" type="module"></script>
-        <script src="./app/paginas/landing/formulario.js"></script>
+    <script src="./app/paginas/landing/nav.js"></script>
+    <script src="./app/componentes/clases/logo_CC.js" type="module"></script>
+    <script src="./app/paginas/landing/formulario.js"></script>
 </body>
 
 </html>

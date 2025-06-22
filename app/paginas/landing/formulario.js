@@ -60,7 +60,7 @@ const verificarForm = (inputs) => {
     enviar.disabled = datosOk ? false : true
 }
 
-const main = () => {
+const mainForm = () => {
     const abrir = document.getElementById("botonInicio")
     const cerrar = document.getElementById("cerrarForm")
     const campos = Array.from(document.querySelectorAll("form .campos .cajaInput input"))
@@ -97,4 +97,4 @@ const main = () => {
     })
 }
 
-main()
+mainForm()
