@@ -5,22 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
-    <link rel="stylesheet" href="./app/paginas/landing/index.css">
-    <link rel="stylesheet" href="./app/paginas/landing/form.css">
-    <link rel="stylesheet" href="./app/comunes/css/desarrollo.css">
+    <link rel="stylesheet" href="./app/public/paginas/landing/index.css">
+    <link rel="stylesheet" href="./app/public/paginas/landing/form.css">
+    <link rel="stylesheet" href="./app/public/comunes/css/desarrollo.css">
     <title>Login</title>
 </head>
 
 <body class="relativo">
     <header horCen>
         <nav class="absoluto horCenEspaciado">
-            <span id="login" class="opcionNav centrado relativo">Entrar</span>
-            <span id="proyectos" class="opcionNav centrado relativo">Proyectos</span>
+            <span id="login" class="login opcionNav centrado">Entrar</span>
+            <span id="proyectos" class="opcionNav centrado">Proyectos</span>
             <span id="idiomas" class="opcionNav centrado relativo idiomas">Idioma
                 <ul id="cajaIdiomas" class="cajaIdiomas absoluto horCenEspaciado borderGrisR4">
-                    <li id="es" class="idioma centrado relativo">Español</li>
-                    <li id="en" class="idioma centrado relativo">Ingles</li>
-                    <li id="eu" class="idioma centrado relativo">Euskera</li>
+                    <li id="es" class="idioma centrado">Español</li>
+                    <li id="en" class="idioma centrado">Ingles</li>
+                    <li id="eu" class="idioma centrado">Euskera</li>
                 </ul>
             </span>
             <span id="personal" class="opcionNav centrado relativo">Sobre mi</span>
@@ -30,17 +30,22 @@
     <div class="cajaBienvenida">
 
         <section class="titulo verCenAround centrado">
-            <h1 class="auto">PROYECTO COMPONENTES AVANZADOS</h1>
-            <q class="texto auto">La felicidad de tu vida depende de la calidad de tus pensamientos...</q>
-            <span>Marco Aurelio</span>
+            <h1 class="auto" data-idioma="titulo">
+                <!--                 PROYECTO COMPONENTES AVANZADOS
+ -->
+            </h1>
+            <q class="texto auto" data-idioma="cita">La felicidad de tu vida depende de la calidad de tus
+                pensamientos...</q>
+            <span data-idioma="autor">Marco Aurelio</span>
         </section>
 
         <section class="descripcion verIzqAround">
-            <p>Este es un proyecto personal basado tanto en componentes web como en componentes de interfaz.</p>
-            <p>Su objetivo principal es servir como repositorio visual y demo de mi propio trabajo. Se han invertido
-                muchas horas
-                en su desarrollo de las cuales una gran parte han sido invertidas en investigacion, auto formación y
-                desarrollo.</p>
+            <p data-idioma="descripcion1">Este es un proyecto personal basado tanto en componentes web como en
+                componentes de interfaz.</p>
+            <p data-idioma="descripcion2">Su objetivo principal es servir como repositorio visual y demo de mi propio
+                trabajo. Se han invertido horas en
+                su desarrollo de las cuales una gran parte han sido invertidas en investigacion, auto formación y
+                desarrollo de la interfaz.</p>
         </section>
 
         <section class="botonInicioCaja">
@@ -48,7 +53,7 @@
         </section>
 
         <section class="hardware">
-            <img class="pantallas" src="./app/comunes/recursos/imagenes/landing_responsive.png" alt="">
+            <img class="pantallas" src="./app/public/comunes/recursos/imagenes/landing_responsive.png" alt="">
             <div class="capa1 fondoPantallas simbolos_CC centrado"></div>
             <div class="capa2 fondoPantallas simbolos_CC centrado"></div>
             <div class="capa3 fondoPantallas simbolos_CC centrado"></div>
@@ -69,8 +74,9 @@
                 <span class="icono material-symbols-outlined ">close</span>
             </div>
 
-            <form action="" method="get" class="relativo verCenEspaciado">
-
+            <form id="form" action="./app/php/landing/comprobarDatosForm.php" method="get"
+                class="relativo verCenEspaciado">
+                <!-- "  -->
                 <section class="cajaTipos verCenEspaciado">
                     <span class="tipos horAbajo relativo">
                         Acceder con mis datos
@@ -99,6 +105,7 @@
                         <span class="iconoForm material-symbols-outlined">touch_app</span>
                     </span>
                 </section>
+                <input type="text" name="idioma" id="idiomaDefecto" value="es">
 
                 <section class="confirmar centrado borderGrisR4">
                     <div class="cajaCondiciones horCenEspaciado relativo">
@@ -117,9 +124,9 @@
         </div>
     </div>
 
-    <script src="./app/paginas/landing/nav.js"></script>
-    <script src="./app/componentes/clases/logo_CC.js" type="module"></script>
-    <script src="./app/paginas/landing/formulario.js"></script>
+    <script type="module" src="./app/public/paginas/landing/nav.js"></script>
+    <script src="./app/public/componentes/clases/logo_CC.js" type="module"></script>
+    <script src="./app/public/paginas/landing/formulario.js"></script>
 </body>
 
 </html>

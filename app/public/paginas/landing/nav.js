@@ -1,3 +1,4 @@
+import {traducir} from "./../../modulos/traducir.js"
 
 const abrirIdiomas = () => {
     const caja = document.getElementById("cajaIdiomas")
@@ -18,7 +19,10 @@ const cerrarIdiomas = () => {
 }
 
 const cambiarIdioma = (idioma) => {
-    console.log(idioma)
+    const campoFormIdioma = document.getElementById("idiomaDefecto")
+    campoFormIdioma.setAttribute("value", idioma)
+    console.log(campoFormIdioma)
+    // traducir
 }
 
 const abrirForm = () => {
@@ -41,6 +45,7 @@ const mainNav = () => {
     idiomas.forEach(item => {
         item.addEventListener("click", () => {
             cambiarIdioma(item.id)
+
         })
     })
 }

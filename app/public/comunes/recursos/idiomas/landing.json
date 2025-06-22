@@ -1,0 +1,18 @@
+{
+    "es": {
+        "landing": {
+            "titulo": "PROYECTO COMPONENTES AVANZADOS",
+            "cita": "La felicidad de tu vida depende de la calidad de tus pensamientos...",
+            "autor": "Marco Aurelio",
+            "descripcion1": "Este es un proyecto personal basado tanto en componentes web como en componentes de interfaz.",
+            "descripcion2": "Su objetivo principal es servir como repositorio visual y demo de mi propio trabajo. Se han invertido horas en su desarrollo de las cuales una gran parte han sido invertidas en investigacion, auto formación y desarrollo de la interfaz."
+        }
+    },
+    "en": {
+        "landing": {
+            "titulo": "ADVANCED COMPONENTS PROJECT",
+            "cita": "The happiness of your life depends on the quality of your thoughts...",
+            "autor": "Marcus Aurelius"
+        }
+    }
+}
