@@ -1,3 +1,18 @@
 {
-    "baseD": ""
+    "BD": {
+        "base": "BD_TEST"
+    },
+    "BD_TEST": {
+        "server": "localhost",
+        "user": "root",
+        "pass": "",
+        "name": "datos",
+        "table": "usuarios"
+    },
+        "BD_TEST2": {
+        "server": "localhost2",
+        "user": "root2",
+        "pass": "",
+        "table": "datos2"
+    }
 }

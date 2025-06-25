@@ -74,7 +74,7 @@
                 <span class="icono material-symbols-outlined ">close</span>
             </div>
 
-            <form id="form" action="./app/php/landing/comprobarDatosForm.php" method="get"
+            <form id="form" action="" method="get"
                 class="relativo verCenEspaciado">
                 <!-- "  -->
                 <section class="cajaTipos verCenEspaciado">
@@ -105,7 +105,7 @@
                         <span class="iconoForm material-symbols-outlined">touch_app</span>
                     </span>
                 </section>
-                <input type="text" name="idioma" id="idiomaDefecto" value="es">
+                <input type="hidden" name="idioma" id="idiomaDefecto" value="es">
 
                 <section class="confirmar centrado borderGrisR4">
                     <div class="cajaCondiciones horCenEspaciado relativo">
@@ -116,7 +116,7 @@
                 </section>
 
                 <section class="enviar horCenEspaciado borderGrisR4">
-                    <button class="reset botonForm" type="reset">Reset</button>
+                    <button id="reset" class="reset botonForm" type="reset">Reset</button>
                     <button id="botonLogin" class="botonLogin  botonForm" type="submit" disabled>Entrar</button>
                 </section>
 
@@ -126,7 +126,7 @@
 
     <script type="module" src="./app/public/paginas/landing/nav.js"></script>
     <script src="./app/public/componentes/clases/logo_CC.js" type="module"></script>
-    <script src="./app/public/paginas/landing/formulario.js"></script>
+    <script type="module" src="./app/public/paginas/landing/form_control.js"></script>
 </body>
 
 </html>
