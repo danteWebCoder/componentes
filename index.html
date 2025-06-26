@@ -74,40 +74,48 @@
                 <span class="icono material-symbols-outlined ">close</span>
             </div>
 
-            <form id="form" action="" method="get"
-                class="relativo verCenEspaciado">
+            <form id="form" action="" method="get" class="relativo verCenEspaciado borderGrisR16">
                 <!-- "  -->
                 <section class="cajaTipos verCenEspaciado">
-                    <span class="tipos horAbajo relativo">
+                    <span class="tipos horCen relativo">
                         Acceder con mis datos
                         <input class="inputOculto" type="radio" name="tipo" value="login" checked>
                     </span>
-                    <span class="tipos horAbajo relativo">
+                    <span id="cuentaNueva" class="tipos horCen relativo">
                         Crear una cuenta nueva
                         <input class="inputOculto" type="radio" name="tipo" value="signUp">
                     </span>
                 </section>
 
-                <section class="campos verCen">
-                    <span class="cajaInput">
-                        <input class="campo" id="user" type="text" name="user" placeholder="Usuario...">
-                    </span>
-                    <span class="cajaInput">
-                        <input class="campo" id="password" type="password" name="password" placeholder="Contraseña...">
-                        <span class="iconoInput material-symbols-outlined"></span>
-                    </span>
-                    <span class="cajaInput repetirPass">
-                        <input class="campo" id="passwordConfirmed" type="password"
-                            placeholder="Repite la contraseña...">
-                        <span class="iconoInput material-symbols-outlined"></span>
-                    </span>
-                    <span class="noRecuerda">No recuerdo mi contraseña de acceso
-                        <span class="iconoForm material-symbols-outlined">touch_app</span>
-                    </span>
+                <section class="campos">
+                    <div class="cajaCampo">
+                        <span class="cajaInput">
+                            <input class="campo" id="user" type="text" name="user" placeholder="Usuario...">
+                        </span>
+                    </div>
+
+                    <div class="cajaCampo">
+                        <span class="cajaInput">
+                            <input class="campo" id="password" type="password" name="password"
+                                placeholder="Contraseña...">
+                            <span class="iconoInput material-symbols-outlined"></span>
+                        </span>
+                    </div>
+
+                    <div id="campoBienvenida" class="cajaCampo verCenEspaciado">
+                        <span class="cajaInput">
+                            <input class="campo" id="passwordConfirmed" type="password"
+                                placeholder="Repite la contraseña...">
+                            <span class="iconoInput material-symbols-outlined"></span>
+                        </span>
+                        <span id="noRecuerda" class="noRecuerda horCen">No recuerdo mi contraseña de acceso
+                            <span class="iconoForm material-symbols-outlined">touch_app</span>
+                        </span>
+                    </div>
                 </section>
                 <input type="hidden" name="idioma" id="idiomaDefecto" value="es">
 
-                <section class="confirmar centrado borderGrisR4">
+                <section class="confirmar centrado borderGrisR8">
                     <div class="cajaCondiciones horCenEspaciado relativo">
                         <span class="check centrado material-symbols-outlined"></span>
                         <span class="condiciones">Acepto las condiciones de uso</span>
@@ -115,7 +123,7 @@
                     </div>
                 </section>
 
-                <section class="enviar horCenEspaciado borderGrisR4">
+                <section class="enviar horCenEspaciado borderGrisR8">
                     <button id="reset" class="reset botonForm" type="reset">Reset</button>
                     <button id="botonLogin" class="botonLogin  botonForm" type="submit" disabled>Entrar</button>
                 </section>

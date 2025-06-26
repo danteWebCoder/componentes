@@ -2,7 +2,7 @@ import { crearElemento } from "./../../modulos/crearElemento.js"
 
 const contenedor = document.getElementById("logo_CC")
 const dom = contenedor.attachShadow({ mode: "open" })
-const urlFondo = new URL("https://img.freepik.com/vector-gratis/diseno-abstracto-poli_1048-9175.jpg", import.meta.url).href
+const urlFondo = new URL("/componentes/app/public/comunes/recursos/imagenes/sep09.png", import.meta.url).href
 
 const textoFrente1 = "dante"
 const textoFrente2 = "web developer"

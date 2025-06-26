@@ -116,6 +116,15 @@
     border: 1px solid rgba(128, 128, 128, 0.5);
     border-radius: 4px;
 }
+.borderGrisR8 {
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 8px;
+}
+
+.borderGrisR16 {
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 16px;
+}
 
 /* posicionamiento flujo */
 .relativo {

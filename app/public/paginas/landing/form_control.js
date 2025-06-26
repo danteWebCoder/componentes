@@ -1,3 +1,5 @@
+import { crearElemento } from "/componentes/app/public/modulos/crearElemento.js"
+
 const modalAbrirCerrar = () => {
     const modal = document.getElementById("modalForm")
     const visible = modal.classList.contains("modalMin")
@@ -75,6 +77,38 @@ const restaurarError = (item, color) => {
     }
 }
 
+const saludarUsuario = () => {
+    const parametros = new URLSearchParams(window.location.search)
+    const usuarioAlta = parametros.get("usuario")
+    const modal = document.getElementById("modalForm")
+
+
+    if (usuarioAlta) {
+        const cuentaNueva = document.getElementById("cuentaNueva")
+        cuentaNueva.style.pointerEvents = "none"
+        cuentaNueva.style.opacity = 0
+
+        const inputPassword = document.getElementById("password")
+        inputPassword.value = ""
+
+        const condiciones = document.getElementById("condiciones")
+        condiciones.checked = true
+
+        const noRecuerda = document.getElementById("noRecuerda")
+        noRecuerda.style.display = "none"
+
+        modal.style.transition = 0
+        modalAbrirCerrar()
+        const campo = document.getElementById("campoBienvenida")
+        const spanTexto1 = crearElemento(campo, "span", "material-symbols-outlined")
+        spanTexto1.textContent = "favorite"
+        const spanTexto2 = crearElemento(campo, "span")
+        spanTexto2.textContent = usuarioAlta.toUpperCase()
+        spanTexto1.style.fontSize = "60px"
+        spanTexto2.style.fontSize = "30px"
+    }
+}
+
 
 const mainForm = () => {
     const form = document.getElementById("form")
@@ -86,6 +120,9 @@ const mainForm = () => {
     const iconosVisivilidad = Array.from(document.querySelectorAll(".iconoInput"))
     const color = window.getComputedStyle(campos[0]).color
     const reset = document.getElementById("reset")
+    const idioma = document.getElementById("idiomaDefecto").value
+
+    saludarUsuario()
 
     verificarBoton()
 
@@ -119,63 +156,95 @@ const mainForm = () => {
         e.preventDefault()
 
         const tipo = tipoForm.find(item => item.name === "tipo" && item.checked).value
-        const parametros = new URLSearchParams()
-        parametros.append("tipo", tipo)
-        parametros.append("nombre", campos[0].value)
-        parametros.append("pass", campos[1].value)
-        parametros.append("pass2", campos[2].value)
-        parametros.append("idioma", document.getElementById("idiomaDefecto").value)
-        const nuevoAction = "app/php/landing/consultaBD.php?" + parametros.toString()
-
         const usuario = campos[0]
         const password = campos[1]
         const password2 = campos[2]
-        const consulta = await fetch(nuevoAction)
-        const respuesta = await consulta.json()
 
-        console.log(respuesta)
+        let usuarioBD
+        let passwordBD
+        let compararPass
 
-        const usuarioBD = respuesta["nombre"]
-        const passwordBD = respuesta["pass"]
-        const passwordBD2 = respuesta["pass2"]
+        // LOGIN ---------------------------------
 
-        //login -----------------------------------------
-        if (tipo === "login" && usuarioBD === false) {
-            marcarError(usuario, "ERROR: El usuario no existe")
-            usuario.addEventListener("click", (e) => {
-                restaurarError(e.target, color)
-            })
+        const parametrosLogin = new URLSearchParams()
+        parametrosLogin.append("tipo", tipo)
+        parametrosLogin.append("nombre", campos[0].value)
+        parametrosLogin.append("pass", campos[1].value)
+        parametrosLogin.append("idioma", idioma)
+        const consultaLogin = "app/php/landing/consultaForm.php?" + parametrosLogin.toString()
+
+        if (tipo === "login") {
+            const consulta = await fetch(consultaLogin)
+            const respuesta = await consulta.json()
+            console.log(respuesta)
+            usuarioBD = respuesta["nombre"]
+            passwordBD = respuesta["pass"]
+
+            if (usuarioBD === false) {
+                marcarError(usuario, "ERROR: El usuario no existe")
+                usuario.addEventListener("click", (e) => {
+                    restaurarError(e.target, color)
+                })
+            }
+
+            if (usuarioBD === true && passwordBD === false) {
+                marcarError(password, "ERROR: La contraseña no es correcta")
+                password.addEventListener("click", (e) => {
+                    restaurarError(e.target, color)
+                })
+            }
+
+            if (usuarioBD === true && passwordBD === true) {
+                const url = "/componentes/app/php/landing/form_redirigir.php"
+                const formOculto = crearElemento(form, "form", null, null, { "method": "POST", "action": url })
+                const inputAccion = crearElemento(formOculto, "input", null, null, { "name": "accion", "type": "hidden", "value": "login" })
+                const inputUsuario = crearElemento(formOculto, "input", null, null, { "name": "usuario", "type": "hidden", "value": usuario.value })
+                const inputIdioma = crearElemento(formOculto, "input", null, null, { "name": "idioma", "type": "hidden", "value": idioma })
+                formOculto.submit()
+            }
         }
 
-        if (tipo === "login" && usuarioBD === true && passwordBD === false) {
-            marcarError(password, "ERROR: La contraseña no es correcta")
-            password.addEventListener("click", (e) => {
-                restaurarError(e.target, color)
-            })
-        }
+        // SIGN UP ------------------------------
 
-        if (tipo === "login" && usuarioBD === true && passwordBD === true) {
-            window.location.href = respuesta["url"]
-        }
+        const parametrosSignUp = new URLSearchParams()
+        parametrosSignUp.append("tipo", tipo)
+        parametrosSignUp.append("nombre", campos[0].value)
+        parametrosSignUp.append("pass", campos[1].value)
+        parametrosSignUp.append("pass2", campos[2].value)
+        parametrosSignUp.append("idioma", idioma)
+        const consultaSignUp = "app/php/landing/consultaForm.php?" + parametrosSignUp.toString()
 
-        // signUp --------------------------------------
-        if (tipo === "signUp" && usuarioBD === true) {
-            marcarError(usuario, "ERROR: El usuario ya existe")
-            usuario.addEventListener("click", (e) => {
-                restaurarError(e.target, color)
-            })
-            verificarBoton()
-        }
+        if (tipo === "signUp") {
+            const consulta = await fetch(consultaSignUp)
+            const respuesta = await consulta.json()
+            console.log(respuesta)
+            usuarioBD = respuesta["nombre"]
+            compararPass = respuesta["compararPass"]
 
-        if (tipo === "signUp" && usuarioBD === false && passwordBD2 === false) {
-            marcarError(password2, "ERROR: Las contraseñas no coinden")
-            password2.addEventListener("click", (e) => {
-                restaurarError(e.target, color)
-            })
-        }
+            if (usuarioBD === false) {
+                marcarError(usuario, "ERROR: El usuario ya existe")
+                usuario.addEventListener("click", (e) => {
+                    restaurarError(e.target, color)
+                })
+                verificarBoton()
+            }
 
-        if (tipo === "signUp" && usuarioBD === false && passwordBD2 === true) {
-            window.location.href = respuesta["url"]
+            if (compararPass === false) {
+                marcarError(password2, "ERROR: Las contraseñas no coinden")
+                password2.addEventListener("click", (e) => {
+                    restaurarError(e.target, color)
+                })
+            }
+
+            if (usuarioBD === true && compararPass === true) {
+                const url = "/componentes/app/php/landing/form_redirigir.php"
+                const formOculto = crearElemento(form, "form", null, null, { "method": "POST", "action": url })
+                formOculto.style.display = "none"
+                const inputAccion = crearElemento(formOculto, "input", null, null, { "name": "accion", "type": "hidden", "value": "signUp" })
+                const inputUsuario = crearElemento(formOculto, "input", null, null, { "name": "usuario", "type": "hidden", "value": usuario.value })
+                const inputIdioma = crearElemento(formOculto, "input", null, null, { "name": "idioma", "type": "hidden", "value": idioma })
+                formOculto.submit()
+            }
         }
 
         reset.addEventListener("click", () => {

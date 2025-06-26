@@ -119,10 +119,10 @@ body {
 
             .botonInicio {
                 width: 120px;
-                height: 40px;
+                height: 4vh;
                 border-radius: 4px;
                 background-color: var(--colorBotonDes);
-                font-size: 16px;
+                font-size: 16px ;
                 letter-spacing: 1px;
                 color: var(--colorTextoBotonDes);
                 cursor: pointer;
