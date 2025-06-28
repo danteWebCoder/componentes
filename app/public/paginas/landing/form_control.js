@@ -80,13 +80,29 @@ const restaurarError = (item, color) => {
 const saludarUsuario = () => {
     const parametros = new URLSearchParams(window.location.search)
     const usuarioAlta = parametros.get("usuario")
-    const modal = document.getElementById("modalForm")
-
 
     if (usuarioAlta) {
+        const input = document.getElementById("user")
+        input.value = usuarioAlta
+        input.readOnly = true
+        input.style.cursor = "context-menu"
+        input.style.color = "rgb(51, 170, 67)"
+        input.style.textAlign = "center"
+        input.style.fontSize = "18px"
+        input.style.letterSpacing = "4px"
+
+        const cajaUser = document.getElementById("cajaUser")
+        cajaUser.style.backgroundColor = "rgb(37, 37, 37)"
+
+        const modal = document.getElementById("modalForm")
+
         const cuentaNueva = document.getElementById("cuentaNueva")
         cuentaNueva.style.pointerEvents = "none"
         cuentaNueva.style.opacity = 0
+
+        const inputPass = document.getElementById("password")
+        inputPass.focus()
+        inputPass.autocomplete = "off"
 
         const inputPassword = document.getElementById("password")
         inputPassword.value = ""
@@ -99,10 +115,10 @@ const saludarUsuario = () => {
 
         modal.style.transition = 0
         modalAbrirCerrar()
-        const campo = document.getElementById("campoBienvenida")
-        const spanTexto1 = crearElemento(campo, "span", "material-symbols-outlined")
+        const campoBienvenida = document.getElementById("campoBienvenidaBienvenida")
+        const spanTexto1 = crearElemento(campoBienvenida, "span", "material-symbols-outlined")
         spanTexto1.textContent = "favorite"
-        const spanTexto2 = crearElemento(campo, "span")
+        const spanTexto2 = crearElemento(campoBienvenida, "span")
         spanTexto2.textContent = usuarioAlta.toUpperCase()
         spanTexto1.style.fontSize = "60px"
         spanTexto2.style.fontSize = "30px"
@@ -176,7 +192,6 @@ const mainForm = () => {
         if (tipo === "login") {
             const consulta = await fetch(consultaLogin)
             const respuesta = await consulta.json()
-            console.log(respuesta)
             usuarioBD = respuesta["nombre"]
             passwordBD = respuesta["pass"]
 
@@ -197,6 +212,7 @@ const mainForm = () => {
             if (usuarioBD === true && passwordBD === true) {
                 const url = "/componentes/app/php/landing/form_redirigir.php"
                 const formOculto = crearElemento(form, "form", null, null, { "method": "POST", "action": url })
+                formOculto.style.display = "none"
                 const inputAccion = crearElemento(formOculto, "input", null, null, { "name": "accion", "type": "hidden", "value": "login" })
                 const inputUsuario = crearElemento(formOculto, "input", null, null, { "name": "usuario", "type": "hidden", "value": usuario.value })
                 const inputIdioma = crearElemento(formOculto, "input", null, null, { "name": "idioma", "type": "hidden", "value": idioma })
@@ -237,7 +253,8 @@ const mainForm = () => {
             }
 
             if (usuarioBD === true && compararPass === true) {
-                const url = "/componentes/app/php/landing/form_redirigir.php"
+                const url = `/componentes/app/php/landing/form_redirigir.php?accion=signUp&usuario=${usuario.value}&pass=${password.value}&idioma=${idioma}`
+                console.log(url)
                 const formOculto = crearElemento(form, "form", null, null, { "method": "POST", "action": url })
                 formOculto.style.display = "none"
                 const inputAccion = crearElemento(formOculto, "input", null, null, { "name": "accion", "type": "hidden", "value": "signUp" })

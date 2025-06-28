@@ -42,7 +42,7 @@
         }
     }
 
-    form {
+    .formVisible {
         width: 520px;
         height: 90%;
         padding: 40px;

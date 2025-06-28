@@ -2,7 +2,7 @@ import { crearElemento } from "./../../modulos/crearElemento.js"
 
 const contenedor = document.getElementById("logo_CC")
 const dom = contenedor.attachShadow({ mode: "open" })
-const urlFondo = new URL("/componentes/app/public/comunes/recursos/imagenes/sep09.png", import.meta.url).href
+const urlFondo = new URL("./../../comunes/recursos/imagenes/sep09.png", import.meta.url).href
 
 const textoFrente1 = "dante"
 const textoFrente2 = "web developer"
@@ -104,14 +104,14 @@ estilo.textContent = `
                 }
                 
                 .separador {
-                    width: 100px;
+                    width: 80px;
                     height: 0px;
                     border: 1px solid white;
                     box-shadow: 0 0 6px cyan, 0 0 6px cyan;
                 }
 
                 .circulo {
-                    width: 20%;
+                    width: 14%;
                     aspect-ratio: 1/1;
                     border: 3px solid white;
                     border-radius: 50%;

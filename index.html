@@ -54,9 +54,15 @@
 
         <section class="hardware">
             <img class="pantallas" src="./app/public/comunes/recursos/imagenes/landing_responsive.png" alt="">
-            <div class="capa1 fondoPantallas simbolos_CC centrado"></div>
-            <div class="capa2 fondoPantallas simbolos_CC centrado"></div>
-            <div class="capa3 fondoPantallas simbolos_CC centrado"></div>
+            <div class="capa1 capa fondoPantallas simbolos_CC centrado">
+                <span id="img1" class="imgAnimada max"></span>
+            </div>
+            <div class="capa2 capa fondoPantallas simbolos_CC centrado"> 
+                <span id="img2" class="imgAnimada max"></span>
+            </div>
+            <div class="capa3 capa fondoPantallas simbolos_CC centrado"> 
+                <span id="img3" class="imgAnimada max"></span>
+            </div>
         </section>
 
     </div>
@@ -74,7 +80,7 @@
                 <span class="icono material-symbols-outlined ">close</span>
             </div>
 
-            <form id="form" action="" method="get" class="relativo verCenEspaciado borderGrisR16">
+            <form id="form" action="" method="post" class="formVisible relativo verCenEspaciado borderGrisR16">
                 <!-- "  -->
                 <section class="cajaTipos verCenEspaciado">
                     <span class="tipos horCen relativo">
@@ -89,7 +95,7 @@
 
                 <section class="campos">
                     <div class="cajaCampo">
-                        <span class="cajaInput">
+                        <span id="cajaUser" class="cajaInput">
                             <input class="campo" id="user" type="text" name="user" placeholder="Usuario...">
                         </span>
                     </div>
@@ -133,6 +139,7 @@
     </div>
 
     <script type="module" src="./app/public/paginas/landing/nav.js"></script>
+    <script type="module" src="./app/public/paginas/landing/animacion.js"></script>
     <script src="./app/public/componentes/clases/logo_CC.js" type="module"></script>
     <script type="module" src="./app/public/paginas/landing/form_control.js"></script>
 </body>
