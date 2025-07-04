@@ -1,22 +1,27 @@
 <?php
     require "./../modulos/accionesBD.php";
 
-    $tipo = $_REQUEST["tipo"];
-    $nombre = $_REQUEST["nombre"];
-    $password = $_REQUEST["pass"];
-    $idioma = $_REQUEST['idioma'];
+    $tipo = $_POST["tipo"];
+    $nombre = $_POST["nombre"];
+    $password = $_POST["pass"];
+    $password2 = $_POST["pass2"] ?? null;
+    $idioma = $_POST['idioma'];
 
     header("Content-Type: application/json");
-    $base = consulta("nombre", $nombre);
+    $respuesta = consulta("nombre", $nombre);
     $datos = [];
+    $datos["tipo"] = $tipo;
 
     if ($tipo === "login") {
-        if (is_array($base)) {
-            $validarNombre = $base["nombre"] === $nombre ? true : false;
-            $validarPass = $base["pass"] === $password ? true : false;
-
+        if (is_array($respuesta)) {
+            $validarNombre = $respuesta["nombre"] === $nombre ? true : false;
+            $validarPass = $respuesta["pass"] === $password ? true : false;
             $datos["nombre"] = $validarNombre;
             $datos["pass"] = $validarPass;
+
+            if ($datos["nombre"] && $datos["pass"]) {
+                /* crear la sesion */
+            }
         } else {
             $datos["nombre"] = false;
             $datos["pass"] = false;
@@ -24,17 +29,13 @@
     }
 
     if ($tipo === "signUp") {
-        $password2 = $_REQUEST['pass2'];
-        $compararPass = $password === $password2;
-
-        if (is_array($base)) {
+        if (is_array($respuesta)) {
             $datos["nombre"] = false;
-            $datos["compararPass"] = "";
+            $datos["pass"] = false;
         } else {
-            $validarPass = $password2 === $password ? true : false;
             $datos["nombre"] = true;
-            $datos["compararPass"] = $validarPass;
-        }     
+            $datos["pass"] = $password === $password2;
+        }
     }
 
     echo json_encode($datos);

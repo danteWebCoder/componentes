@@ -1,7 +1,20 @@
 import { crearElemento } from "/componentes/app/public/modulos/crearElemento.js"
 
+const modal = document.getElementById("modalForm")
+const form = document.getElementById("form")
+const abrir = document.getElementById("botonInicio")
+const cerrar = document.getElementById("cerrarForm")
+const campos = Array.from(document.querySelectorAll("form .campos .cajaInput input"))
+const tipoForm = Array.from(document.querySelectorAll("form .cajaTipos .inputOculto"))
+const inputs = [...campos, document.getElementById("condiciones"), ...tipoForm]
+const iconosVisivilidad = Array.from(document.querySelectorAll(".iconoInput"))
+const color = window.getComputedStyle(campos[0]).color
+const condiciones = document.getElementById("condiciones")
+const reset = document.getElementById("reset")
+const enviar = document.getElementById("botonLogin")
+const idioma = document.getElementById("idiomaDefecto").value
+
 const modalAbrirCerrar = () => {
-    const modal = document.getElementById("modalForm")
     const visible = modal.classList.contains("modalMin")
 
     if (visible) {
@@ -42,8 +55,8 @@ const restablecerIconos = (item) => {
 const verificarBoton = () => {
     const camposForm = Array.from(document.querySelectorAll(".cajaInput .campo"))
     const tipoForm = Array.from(document.querySelectorAll(".cajaTipos .inputOculto")).find(item => item.name === "tipo" && item.checked).value
-    const enviar = document.getElementById("botonLogin")
-    const condiciones = document.getElementById("condiciones")
+/*     const enviar = document.getElementById("botonLogin")
+ */    
     let datosOk = true
 
     if (camposForm[0].value.length <= 4) datosOk = false
@@ -125,23 +138,16 @@ const saludarUsuario = () => {
     }
 }
 
+const bienvenida = (itemForm, itemCerrar) => {
+    itemForm.style.display = "none"
+    itemCerrar.style.display = "none"
+}
 
 const mainForm = () => {
-    const form = document.getElementById("form")
-    const abrir = document.getElementById("botonInicio")
-    const cerrar = document.getElementById("cerrarForm")
-    const campos = Array.from(document.querySelectorAll("form .campos .cajaInput input"))
-    const tipoForm = Array.from(document.querySelectorAll("form .cajaTipos .inputOculto"))
-    const inputs = [...campos, document.getElementById("condiciones"), ...tipoForm]
-    const iconosVisivilidad = Array.from(document.querySelectorAll(".iconoInput"))
-    const color = window.getComputedStyle(campos[0]).color
-    const reset = document.getElementById("reset")
-    const idioma = document.getElementById("idiomaDefecto").value
 
     saludarUsuario()
 
     verificarBoton()
-
         // punto coma forEach desde array directo
         ;[abrir, cerrar].forEach(item => {
             item.addEventListener("click", () => {
@@ -210,13 +216,16 @@ const mainForm = () => {
             }
 
             if (usuarioBD === true && passwordBD === true) {
-                const url = "/componentes/app/php/landing/form_redirigir.php"
-                const formOculto = crearElemento(form, "form", null, null, { "method": "POST", "action": url })
-                formOculto.style.display = "none"
-                const inputAccion = crearElemento(formOculto, "input", null, null, { "name": "accion", "type": "hidden", "value": "login" })
-                const inputUsuario = crearElemento(formOculto, "input", null, null, { "name": "usuario", "type": "hidden", "value": usuario.value })
-                const inputIdioma = crearElemento(formOculto, "input", null, null, { "name": "idioma", "type": "hidden", "value": idioma })
-                formOculto.submit()
+                /*                 const url = "/componentes/app/php/landing/form_redirigir.php"
+                                const formOculto = crearElemento(form, "form", null, null, { "method": "POST", "action": url })
+                                formOculto.style.display = "none"
+                                const inputAccion = crearElemento(formOculto, "input", null, null, { "name": "accion", "type": "hidden", "value": "login" })
+                                const inputUsuario = crearElemento(formOculto, "input", null, null, { "name": "usuario", "type": "hidden", "value": usuario.value })
+                                const inputIdioma = crearElemento(formOculto, "input", null, null, { "name": "idioma", "type": "hidden", "value": idioma })
+                                formOculto.submit()
+                 */
+                bienvenida()
+
             }
         }
 

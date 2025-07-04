@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined">
     <link rel="stylesheet" href="./app/public/paginas/landing/index.css">
-    <link rel="stylesheet" href="./app/public/paginas/landing/form.css">
+    <link rel="stylesheet" href="./app/public/paginas/landing/modal.css">
     <link rel="stylesheet" href="./app/public/comunes/css/desarrollo.css">
     <title>Login</title>
 </head>
@@ -14,13 +14,19 @@
 <body class="relativo">
     <header horCen>
         <nav class="absoluto horCenEspaciado">
-            <span id="login" class="login opcionNav centrado">Entrar</span>
+            <span id="login" class="login opcionNav centrado">Login</span>
             <span id="proyectos" class="opcionNav centrado">Proyectos</span>
             <span id="idiomas" class="opcionNav centrado relativo idiomas">Idioma
                 <ul id="cajaIdiomas" class="cajaIdiomas absoluto horCenEspaciado borderGrisR4">
-                    <li id="es" class="idioma centrado">Español</li>
-                    <li id="en" class="idioma centrado">Ingles</li>
-                    <li id="eu" class="idioma centrado">Euskera</li>
+                    <li class="idioma centrado relativo">Español
+                        <input id="es" type="radio" name="opc-idioma" class="inputOculto" checked>
+                    </li>
+                    <li class="idioma centrado relativo">Ingles
+                        <input id="en" type="radio" name="opc-idioma" class="inputOculto">
+                    </li>
+                    <li class="idioma centrado relativo">Euskera
+                        <input id="eu" type="radio" name="opc-idioma" class="inputOculto">
+                    </li>
                 </ul>
             </span>
             <span id="personal" class="opcionNav centrado relativo">Sobre mi</span>
@@ -31,8 +37,7 @@
 
         <section class="titulo verCenAround centrado">
             <h1 class="auto" data-idioma="titulo">
-                <!--                 PROYECTO COMPONENTES AVANZADOS
- -->
+                PROYECTO COMPONENTES AVANZADOS
             </h1>
             <q class="texto auto" data-idioma="cita">La felicidad de tu vida depende de la calidad de tus
                 pensamientos...</q>
@@ -48,8 +53,8 @@
                 desarrollo de la interfaz.</p>
         </section>
 
-        <section class="botonInicioCaja">
-            <span id="botonInicio" class="botonInicio centrado">Comenzar</span>
+        <section class="cajaComenzar">
+            <span id="comenzar" class="comenzar centrado">Comenzar</span>
         </section>
 
         <section class="hardware">
@@ -57,10 +62,10 @@
             <div class="capa1 capa fondoPantallas simbolos_CC centrado">
                 <span id="img1" class="imgAnimada max"></span>
             </div>
-            <div class="capa2 capa fondoPantallas simbolos_CC centrado"> 
+            <div class="capa2 capa fondoPantallas simbolos_CC centrado">
                 <span id="img2" class="imgAnimada max"></span>
             </div>
-            <div class="capa3 capa fondoPantallas simbolos_CC centrado"> 
+            <div class="capa3 capa fondoPantallas simbolos_CC centrado">
                 <span id="img3" class="imgAnimada max"></span>
             </div>
         </section>
@@ -73,16 +78,15 @@
         </div>
     </footer>
 
-    <div id="modalForm" class="modalMin absoluto max centrado">
+    <div id="modal" class="modal modalOculto absoluto max centrado">
 
         <div class="cajaForm centrado relativo">
-            <div id="cerrarForm" class="cerrar centrado absoluto">
+            <div id="cerrar" class="cerrar centrado absoluto">
                 <span class="icono material-symbols-outlined ">close</span>
             </div>
 
-            <form id="form" action="" method="post" class="formVisible relativo verCenEspaciado borderGrisR16">
-                <!-- "  -->
-                <section class="cajaTipos verCenEspaciado">
+            <form id="form" action="" method="post" class="relativo verCenEspaciado borderGrisR16">
+                <section id="tipos" class="cajaTipos verCenEspaciado">
                     <span class="tipos horCen relativo">
                         Acceder con mis datos
                         <input class="inputOculto" type="radio" name="tipo" value="login" checked>
@@ -95,27 +99,31 @@
 
                 <section class="campos">
                     <div class="cajaCampo">
-                        <span id="cajaUser" class="cajaInput">
-                            <input class="campo" id="user" type="text" name="user" placeholder="Usuario...">
+                        <span id="cajaUsuario" class="cajaInput">
+                            <span class="iconoInput centrado material-symbols-outlined">person</span>
+                            <input class="campo" id="usuario" type="text" name="usuario" placeholder="Usuario...">
                         </span>
                     </div>
 
                     <div class="cajaCampo">
                         <span class="cajaInput">
+                            <span class="iconoInput centrado material-symbols-outlined">lock</span>
                             <input class="campo" id="password" type="password" name="password"
                                 placeholder="Contraseña...">
-                            <span class="iconoInput material-symbols-outlined"></span>
+                            <span class="iconoVisibilidad centrado material-symbols-outlined">visibility</span>
                         </span>
                     </div>
 
-                    <div id="campoBienvenida" class="cajaCampo verCenEspaciado">
+                    <div id="campoDinamico" class="cajaCampo verCenEspaciado">
                         <span class="cajaInput">
-                            <input class="campo" id="passwordConfirmed" type="password"
+                            <span class="iconoInput centrado material-symbols-outlined">lock</span>
+                            <input class="campo" id="passwordConfirmado" type="password"
                                 placeholder="Repite la contraseña...">
-                            <span class="iconoInput material-symbols-outlined"></span>
+                            <span class="iconoVisibilidad centrado material-symbols-outlined">visibility</span>
                         </span>
+
                         <span id="noRecuerda" class="noRecuerda horCen">No recuerdo mi contraseña de acceso
-                            <span class="iconoForm material-symbols-outlined">touch_app</span>
+                            <span class="iconoForm centrado material-symbols-outlined">left_click</span>
                         </span>
                     </div>
                 </section>
@@ -125,23 +133,28 @@
                     <div class="cajaCondiciones horCenEspaciado relativo">
                         <span class="check centrado material-symbols-outlined"></span>
                         <span class="condiciones">Acepto las condiciones de uso</span>
-                        <input class="inputOculto" type="checkbox" id="condiciones">
+                        <input id="condiciones" class="inputOculto" type="checkbox">
                     </div>
                 </section>
 
                 <section class="enviar horCenEspaciado borderGrisR8">
-                    <button id="reset" class="reset botonForm" type="reset">Reset</button>
-                    <button id="botonLogin" class="botonLogin  botonForm" type="submit" disabled>Entrar</button>
+                    <button id="botonReset" class="botonReset botonForm" type="reset">Reset</button>
+                    <button id="botonEnviar" class="botonEnviar botonForm" type="submit" disabled>Entrar</button>
                 </section>
 
             </form>
+        </div>
+
+        <div id="cajaSaludo" class="cajaSaludo absoluto BORDEROJO">
+            <div class="saludo">Bienvenido</div>
+            <div class="cajaNombre"></div>
         </div>
     </div>
 
     <script type="module" src="./app/public/paginas/landing/nav.js"></script>
     <script type="module" src="./app/public/paginas/landing/animacion.js"></script>
     <script src="./app/public/componentes/clases/logo_CC.js" type="module"></script>
-    <script type="module" src="./app/public/paginas/landing/form_control.js"></script>
+    <script type="module" src="./app/public/paginas/landing/control_form.js"></script>
 </body>
 
 </html>

@@ -18,34 +18,19 @@ const cerrarIdiomas = () => {
     }
 }
 
-const cambiarIdioma = (idioma) => {
-    const campoFormIdioma = document.getElementById("idiomaDefecto")
-    campoFormIdioma.setAttribute("value", idioma)
-    console.log(campoFormIdioma)
-    // traducir
-}
-
-const abrirForm = () => {
-    console.log("modal")
-    const modal = document.getElementById("modalForm")
-    modal.classList.replace("modalMin", "modalMax")
-}
-
 const mainNav = () => {
     const opciones = Array.from(document.querySelectorAll(".opcionNav"))
     opciones.forEach(item => {
         item.addEventListener("click", () => {
             if (item.id !== "idiomas") cerrarIdiomas()
             if (item.id === "idiomas") abrirIdiomas()
-            if (item.id === "login") abrirForm()
         })
     })
 
-    const idiomas = Array.from(document.querySelectorAll(".idioma"))
+    const idiomas = Array.from(document.querySelectorAll("#cajaIdiomas .inputOculto"))
     idiomas.forEach(item => {
         item.addEventListener("click", () => {
-            cambiarIdioma(item.id)
-
+            console.log(idiomas.find(item => item.checked).id)
         })
     })
 }

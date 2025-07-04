@@ -1,14 +1,9 @@
 import { aleatorio } from "./../../modulos/extra.js"
-import { esperar } from "./../../modulos/tiempo.js"
-
-
+import { esperar } from "./../../modulos/tiempos.js"
 
 const main = async () => {
-
     let acum = Array(3).fill(0)
-
     const rotar = (item, num) => {
-        console.log(num)
         const incremento = aleatorio(180, 360)
         const direccion = aleatorio(0, 1)
         direccion === 0
