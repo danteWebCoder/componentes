@@ -2,39 +2,41 @@
     require "./../modulos/accionesBD.php";
 
     $tipo = $_POST["tipo"];
-    $nombre = $_POST["nombre"];
+    $usuario = $_POST["usuario"];
     $password = $_POST["pass"];
     $password2 = $_POST["pass2"] ?? null;
     $idioma = $_POST['idioma'];
 
     header("Content-Type: application/json");
-    $respuesta = consulta("nombre", $nombre);
+    $respuesta = consulta("usuario", $usuario);
     $datos = [];
     $datos["tipo"] = $tipo;
 
     if ($tipo === "login") {
         if (is_array($respuesta)) {
-            $validarNombre = $respuesta["nombre"] === $nombre ? true : false;
+            $validarUsuario = $respuesta["usuario"] === $usuario ? true : false;
             $validarPass = $respuesta["pass"] === $password ? true : false;
-            $datos["nombre"] = $validarNombre;
+            $datos["usuario"] = $validarUsuario;
             $datos["pass"] = $validarPass;
 
-            if ($datos["nombre"] && $datos["pass"]) {
+            if ($datos["usuario"] && $datos["pass"]) {
                 /* crear la sesion */
             }
         } else {
-            $datos["nombre"] = false;
+            $datos["usuario"] = false;
             $datos["pass"] = false;
         }
     }
 
     if ($tipo === "signUp") {
         if (is_array($respuesta)) {
-            $datos["nombre"] = false;
+            $datos["usuario"] = false;
             $datos["pass"] = false;
         } else {
-            $datos["nombre"] = true;
+            $datos["usuario"] = true;
             $datos["pass"] = $password === $password2;
+
+            if ($datos["pass"]) crearReg(["usuario" => $usuario, "pass" => $password, "idioma" => $idioma]);
         }
     }
 

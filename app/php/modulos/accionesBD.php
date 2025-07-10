@@ -9,7 +9,7 @@ function consulta($item, $valor) {
     $table = $baseSeleccionada["table"];
 
     $conexion = mysqli_connect($server, $userBD, $passBD, $name) or die("Error al conectar con la base de datos");
-    $query = mysqli_query($conexion, "select id, nombre, pass, idioma 
+    $query = mysqli_query($conexion, "select id, usuario, pass, idioma 
         FROM $table WHERE $item = '$valor'")
         or die(mysqli_error($conexion));
 
@@ -33,7 +33,7 @@ function crearReg($array) {
     $datosFecha = date("Y-m-d");
 
     $conexion = mysqli_connect($server, $userBD, $passBD, $name) or die("Error al conectar con la base de datos");
-    $query = mysqli_query($conexion, "insert into $table(nombre, pass, idioma, alta) 
+    $query = mysqli_query($conexion, "insert into $table(usuario, pass, idioma, alta) 
         VALUES ('$datosNombre', '$datosPass', '$datosIdioma', '$datosFecha')")
         or die(mysqli_error($conexion));
 }

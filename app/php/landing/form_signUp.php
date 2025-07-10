@@ -1,6 +1,6 @@
     <?php
-        $accion = $_REQUEST["accion"];
-        $usuario = $_REQUEST["usuario"];
+        $tipo = $_REQUEST["tipo"];
+        $usuario = $_REQUEST["nombre"];
         $pass = $_REQUEST["pass"];
         $idioma = $_REQUEST["idioma"];
 

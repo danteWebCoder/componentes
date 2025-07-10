@@ -54,11 +54,11 @@ const comprobarInputs = (boton, inputs) => {
 const enviarForm = async (campos) => {
     const parametros = new URLSearchParams()
     parametros.append("tipo", comprobarTipo())
-    parametros.append("nombre", campos[0].value)
+    parametros.append("usuario", campos[0].value)
     parametros.append("pass", campos[1].value)
     parametros.append("pass2", campos[2].value)
     parametros.append("idioma", document.querySelector("#idiomas .inputOculto:checked").id)
-    const url = "app/php/landing/consultaForm.php"
+    const url = "app/php/landing/accionesForm.php"
     return await fetchConsulta(url, parametros)
 }
 
@@ -80,11 +80,10 @@ const fetchConsulta = async (url, parametros) => {
 
 const procesarDatos = (datos, campos) => {
     const tipo = datos["tipo"]
-    const nombre = datos["nombre"]
+    const usuario = datos["usuario"]
     const pass = datos["pass"]
-    console.log(tipo, nombre, pass)
 
-    if (tipo === "login" && !nombre) {
+    if (tipo === "login" && !usuario) {
         marcarError(campos[0], "ERROR - El usuario no existe")
         return
     }
@@ -94,7 +93,7 @@ const procesarDatos = (datos, campos) => {
         return
     }
 
-    if (tipo === "signUp" && !nombre) {
+    if (tipo === "signUp" && !usuario) {
         marcarError(campos[0], "ERROR - El usuario ya existe")
         return
     }
@@ -162,7 +161,9 @@ const controlForm = () => {
         const datos = await enviarForm(camposForm)
         procesarDatos(datos, camposForm)
         comprobarInputs(botonEnviar, inputsForm)
-        iniciarLogin( document.getElementById("usuario").value, datos, modal, form)
+        if (datos["tipo"] === "login" && datos["usuario"] && datos["pass"]) {
+            iniciarLogin(document.getElementById("usuario").value, form)
+        }
     })
 
     form.addEventListener("reset", () => {
