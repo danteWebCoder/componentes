@@ -1,4 +1,4 @@
-import {traducir} from "./../../modulos/traducir.js"
+import { traducir } from "./../../modulos/traducir.js"
 
 const abrirIdiomas = () => {
     const caja = document.getElementById("cajaIdiomas")
@@ -6,6 +6,7 @@ const abrirIdiomas = () => {
         ? "flex"
         : "none"
     idiomas.classList.toggle("seleccionada")
+    console.log("abrir")
 }
 
 const cerrarIdiomas = () => {
@@ -14,8 +15,9 @@ const cerrarIdiomas = () => {
     const valorDisplay = getComputedStyle(caja).display
     if (valorDisplay) {
         caja.style.display = "none"
-        idiomas.classList.toggle("seleccionada")
+        idiomas.classList.remove("seleccionada")
     }
+    console.log("cerrar")
 }
 
 const mainNav = () => {
