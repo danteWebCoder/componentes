@@ -1,4 +1,4 @@
-import { traducir } from "./../../../modulos/traducir.js"
+import { traducir } from "./../../../comunes/scripts/modulos/traducir.js"
 
 const abrirIdiomas = () => {
     const caja = document.getElementById("cajaIdiomas")

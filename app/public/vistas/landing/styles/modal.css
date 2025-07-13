@@ -234,7 +234,7 @@
         transition: 1s;
 
         .fondoMalla {
-            background-image: url("./../../comunes/recursos/imagenes/fondoPuntos.png");
+            background-image: url("./../../../recursos/imagenes/fondoPuntos.png");
             background-size: auto;
             background-repeat: repeat;
             opacity: 0.6;

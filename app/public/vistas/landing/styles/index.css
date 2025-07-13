@@ -1,5 +1,5 @@
-@import url("./../../comunes/css/clases.css");
-@import url("./../../comunes/css/fuentes.css");
+@import url("./../../../comunes/styles/clases.css");
+@import url("./../../../comunes/styles/fuentes.css");
 
 :root {
     --colorBody: rgb(20, 20, 20);
@@ -170,7 +170,7 @@ body {
             background-color: rgb(220, 220, 220);
 
             .imgAnimada {
-                background-image: url(./../../comunes/recursos/imagenes/engranaje.png);
+                background-image: url("./../../../recursos/imagenes/engranaje.png");
                 background-size: 33%;
                 background-repeat: no-repeat;
                 background-position: center;

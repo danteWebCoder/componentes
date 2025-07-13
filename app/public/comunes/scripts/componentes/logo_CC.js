@@ -1,12 +1,9 @@
-import { crearElemento } from "./../../modulos/crearElemento.js"
-
 const contenedor = document.getElementById("logo_CC")
 const dom = contenedor.attachShadow({ mode: "open" })
-const urlFondo = new URL("./../../comunes/recursos/imagenes/sep09.png", import.meta.url).href
+const urlFondo = new URL("./../../../recursos/imagenes/fondoLogo.png", import.meta.url).href
 
 const textoFrente1 = "dante"
 const textoFrente2 = "web developer"
-const textoBack = "bienvenido"
 const fuente = "Anta"
 
 dom.innerHTML = `
@@ -25,7 +22,7 @@ dom.innerHTML = `
         </div>
     `
 
-const estilo = crearElemento(dom, "style")
+const estilo = document.createElement("style")
 estilo.textContent = `
     * {
         margin: 0;
@@ -130,3 +127,4 @@ estilo.textContent = `
         }
     }
 `
+dom.appendChild(estilo)

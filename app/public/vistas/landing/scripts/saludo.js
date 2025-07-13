@@ -1,5 +1,5 @@
-import { esperar } from "./../../../modulos/tiempos.js"
-import { crearElemento } from "./../../../modulos/crearElemento.js"
+import { esperar } from "./../../../comunes/scripts/modulos/tiempos.js"
+import { crearElemento } from "./../../../comunes/scripts/modulos/crearElemento.js"
 
 const cerrarForm = async (item) => {
     form.style.transition = "0.5s"

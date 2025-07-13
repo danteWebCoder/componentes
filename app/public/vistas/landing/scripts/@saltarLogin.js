@@ -1,10 +1,15 @@
-import { limpiarElemento } from "../../../modulos/extra.js"
+/* import { crearInterfaz } from "../../interface/scripts/crearInterface.js";
+ */
+const saltar = document.getElementById("saltar")
+/* saltar.addEventListener("click", crearInterfaz) */
+
+
+/* import { limpiarElemento } from "../../../modulos/extra.js"
 import { crearElemento } from "../../../modulos/crearElemento.js"
 import { aplicarCss } from "../../../modulos/aplicarCss.js"
 
 const limpiarBody = async () => {
     limpiarElemento(document.body)
-    /* limpiar css */
     document.body.style.backgroundColor = "rgb(255, 255, 255)"
     document.querySelector("link[href='./app/public/paginas/landing/index.css']").remove()
     document.querySelector("link[href='./app/public/paginas/landing/modal.css']").remove()
@@ -32,8 +37,9 @@ const dibujarBarraIzq = async () => {
 
 
 
-export const crearInterfaz = async () => { /* main */
+export const crearInterfaz = async () => { 
     await limpiarBody() 
     await crearEstruturaHtml()
-/*     const menuIzq = await dibujarBarraIzq()
- */}
+    const menuIzq = await dibujarBarraIzq()
+}
+ */

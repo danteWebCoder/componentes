@@ -1,5 +1,5 @@
-import { aleatorio } from "./../../../modulos/extra.js"
-import { esperar } from "./../../../modulos/tiempos.js"
+import { aleatorio } from "./../../../comunes/scripts/modulos/extra.js"
+import { esperar } from "./../../../comunes/scripts/modulos/tiempos.js"
 
 export const animacionEngranajes = async () => {
     let acum = Array(3).fill(0)

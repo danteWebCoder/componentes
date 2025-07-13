@@ -1,17 +1,17 @@
 import { iniciarLogin } from "./saludo.js"
-import { evento } from "./../../../modulos/eventos.js"
+import * as eventos from "./../../../comunes/scripts/modulos/eventos.js"
 
 const minChar = 4 /* caracteres minimos */
 
-const controlModal = (modal) => {
+const controlModal = (modal, arrayEventos) => {
     const botonLogin = document.getElementById("login")
     const botonComenzar = document.getElementById("comenzar")
 
     const botonesApertura = [botonLogin, botonComenzar]
-    botonesApertura.forEach(item => evento("eventosLanding", item, "click", () => modal.classList.toggle("modalVisible")))
+    botonesApertura.forEach(item => eventos.crear(arrayEventos, item, "click", () => modal.classList.toggle("modalVisible")))
 
     const botonCerrar = document.getElementById("cerrar")
-    evento("eventosLanding", botonCerrar, "click", () => modal.classList.toggle("modalVisible"))
+    eventos.crear(arrayEventos, botonCerrar, "click", () => modal.classList.toggle("modalVisible"))
 }
 
 const activarIconos = (item, accion) => {
@@ -104,28 +104,29 @@ const restaurarError = (item) => {
 const resetCampos = (campos) => { campos.forEach(item => restaurarError(item)) }
 
 /* MAIN ------------------------------------------------------------------------------------- */
-export const controlForm = () => {
+export const controlForm = (arrayEventos) => {
+    console.log(arrayEventos)
     const modal = document.getElementById("modal")
     const camposForm = Array.from(document.querySelectorAll(".campo"))
     const inputsForm = [...camposForm, document.getElementById("condiciones")]
     const botonEnviar = document.getElementById("botonEnviar")
 
-    controlModal(modal)
+    controlModal(modal, arrayEventos)
     resetCampos(camposForm)
     comprobarInputs(botonEnviar, inputsForm)
 
     inputsForm.forEach(item => {
-        evento("eventosLanding", item, "input", () => comprobarInputs(botonEnviar, inputsForm))
-        evento("eventosLanding", item, "click", () => restaurarError(item))
+        eventos.crear(arrayEventos, item, "input", () => comprobarInputs(botonEnviar, inputsForm))
+        eventos.crear(arrayEventos, item, "click", () => restaurarError(item))
     })
 
     const iconosVisibilidad = Array.from(document.querySelectorAll(".iconoVisibilidad"))
     iconosVisibilidad.forEach(item => {
-        evento("eventosLanding", item, "click", () => cambiarVisibilidad(item))
+        eventos.crear(arrayEventos, item, "click", () => cambiarVisibilidad(item))
     })
 
     const form = document.getElementById("form")
-    evento("eventosLanding", form, "submit", async (e) => {
+    eventos.crear(arrayEventos, form, "submit", async (e) => {
         e.preventDefault()
         const datos = await enviarForm(camposForm)
         procesarDatos(datos, camposForm)
@@ -136,7 +137,7 @@ export const controlForm = () => {
             : null
     })
 
-    evento("eventosLanding", form, "reset", () => {
+    eventos.crear(arrayEventos, form, "reset", () => {
         botonEnviar.disabled = true
         iconosVisibilidad.forEach(item => {
             activarIconos(item, true)
