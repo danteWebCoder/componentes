@@ -1,4 +1,5 @@
 import { iniciarLogin } from "./saludo.js"
+import { evento } from "./../../../modulos/eventos.js"
 
 const minChar = 4 /* caracteres minimos */
 
@@ -7,12 +8,10 @@ const controlModal = (modal) => {
     const botonComenzar = document.getElementById("comenzar")
 
     const botonesApertura = [botonLogin, botonComenzar]
-    botonesApertura.forEach(item =>
-        item.addEventListener("click", () => modal.classList.toggle("modalVisible"))
-    )
+    botonesApertura.forEach(item => evento("eventosLanding", item, "click", () => modal.classList.toggle("modalVisible")))
 
     const botonCerrar = document.getElementById("cerrar")
-    botonCerrar.addEventListener("click", () => modal.classList.toggle("modalVisible"))
+    evento("eventosLanding", botonCerrar, "click", () => modal.classList.toggle("modalVisible"))
 }
 
 const activarIconos = (item, accion) => {
@@ -23,9 +22,7 @@ const activarIconos = (item, accion) => {
 
 const cambiarVisibilidad = (item) => {
     const input = item.previousElementSibling
-    input.type = input.type === "password"
-        ? "text"
-        : "password"
+    input.type = input.type === "password" ? "text" : "password"
 }
 
 const comprobarTipo = () => {
@@ -42,7 +39,6 @@ const comprobarInputs = (boton, inputs) => {
     inputs.forEach((item, num) => {
         const valor = item.value.length
         const iconoVisibilidad = item.nextElementSibling
-
         if (tipo === "login") { if (num < 2 && valor <= minChar || item.value.includes("ERROR")) campos = false }
         if (tipo === "signUp") { if (num < 3 && valor <= minChar || item.value.includes("ERROR")) campos = false }
         if (inputs[3].checked === false) campos = false
@@ -83,25 +79,10 @@ const procesarDatos = (datos, campos) => {
     const usuario = datos["usuario"]
     const pass = datos["pass"]
 
-    if (tipo === "login" && !usuario) {
-        marcarError(campos[0], "ERROR - El usuario no existe")
-        return
-    }
-
-    if (tipo === "login" && !pass) {
-        marcarError(campos[1], "ERROR - La contraseña no es correcta")
-        return
-    }
-
-    if (tipo === "signUp" && !usuario) {
-        marcarError(campos[0], "ERROR - El usuario ya existe")
-        return
-    }
-
-    if (tipo === "signUp" && !pass) {
-        marcarError(campos[2], "ERROR - Las contraseñas no coinciden")
-        return
-    }
+    if (tipo === "login" && !usuario) { marcarError(campos[0], "ERROR - El usuario no existe"); return }
+    if (tipo === "login" && !pass) { marcarError(campos[1], "ERROR - La contraseña no es correcta"); return }
+    if (tipo === "signUp" && !usuario) { marcarError(campos[0], "ERROR - El usuario ya existe"); return }
+    if (tipo === "signUp" && !pass) { marcarError(campos[2], "ERROR - Las contraseñas no coinciden"); return }
 }
 
 const marcarError = (item, text) => {
@@ -116,20 +97,14 @@ const restaurarError = (item) => {
         item.style.color = colorInputs
         item.autocomplete = "new-password"
         item.value = ""
-
         if (item.id === "password" || item.id === "passwordConfirmado") item.type = "password"
     }
 }
 
-const resetCampos = (campos) => {
-    campos.forEach(item => {
-        restaurarError(item)
-    })
-}
+const resetCampos = (campos) => { campos.forEach(item => restaurarError(item)) }
 
 /* MAIN ------------------------------------------------------------------------------------- */
-const controlForm = () => {
-
+export const controlForm = () => {
     const modal = document.getElementById("modal")
     const camposForm = Array.from(document.querySelectorAll(".campo"))
     const inputsForm = [...camposForm, document.getElementById("condiciones")]
@@ -140,33 +115,28 @@ const controlForm = () => {
     comprobarInputs(botonEnviar, inputsForm)
 
     inputsForm.forEach(item => {
-        item.addEventListener("input", () => {
-            comprobarInputs(botonEnviar, inputsForm)
-        })
-        item.addEventListener("click", () => {
-            restaurarError(item)
-        })
+        evento("eventosLanding", item, "input", () => comprobarInputs(botonEnviar, inputsForm))
+        evento("eventosLanding", item, "click", () => restaurarError(item))
     })
 
     const iconosVisibilidad = Array.from(document.querySelectorAll(".iconoVisibilidad"))
     iconosVisibilidad.forEach(item => {
-        item.addEventListener("click", () => {
-            cambiarVisibilidad(item)
-        })
+        evento("eventosLanding", item, "click", () => cambiarVisibilidad(item))
     })
 
     const form = document.getElementById("form")
-    form.addEventListener("submit", async (e) => {
+    evento("eventosLanding", form, "submit", async (e) => {
         e.preventDefault()
         const datos = await enviarForm(camposForm)
         procesarDatos(datos, camposForm)
         comprobarInputs(botonEnviar, inputsForm)
-        if (datos["tipo"] === "login" && datos["usuario"] && datos["pass"]) {
-            iniciarLogin(document.getElementById("usuario").value, form)
-        }
+
+        datos["tipo"] === "login" && datos["usuario"] && datos["pass"]
+            ? iniciarLogin(document.getElementById("usuario").value, form)
+            : null
     })
 
-    form.addEventListener("reset", () => {
+    evento("eventosLanding", form, "reset", () => {
         botonEnviar.disabled = true
         iconosVisibilidad.forEach(item => {
             activarIconos(item, true)
@@ -175,5 +145,3 @@ const controlForm = () => {
         resetCampos(camposForm)
     })
 }
-
-controlForm()

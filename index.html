@@ -13,6 +13,7 @@
 
 <body class="relativo">
     <header horCen>
+        <div id="saltar" class="saltar centrado relativo borderGrisR4">Saltar Login</div> <!-- saltar -->
         <nav class="absoluto horCenEspaciado">
             <span id="login" class="login opcionNav centrado">Login</span>
             <span id="proyectos" class="opcionNav centrado">Proyectos</span>
@@ -79,13 +80,12 @@
     </footer>
 
     <div id="modal" class="modal modalOculto absoluto max centrado">
-
         <div class="cajaForm centrado relativo">
-            <div id="cerrar" class="cerrar centrado absoluto">
-                <span class="icono material-symbols-outlined ">close</span>
-            </div>
+            <form id="form" action="" method="post" class="relativo verCenEspaciado">
+                <div id="cerrar" class="cerrar centrado absoluto">
+                    <span class="icono material-symbols-outlined ">close</span>
+                </div>
 
-            <form id="form" action="" method="post" class="relativo verCenEspaciado borderGrisR16">
                 <section id="tipos" class="cajaTipos verCenEspaciado">
                     <span class="tipos horCen relativo">
                         Acceder con mis datos
@@ -122,7 +122,7 @@
                             <span class="iconoVisibilidad centrado material-symbols-outlined">visibility</span>
                         </span>
 
-                        <span id="noRecuerda" class="noRecuerda horCen">No recuerdo mi contraseña de acceso
+                        <span id="noRecuerda" class="noRecuerda horCen">No recuerdo mi contraseña de acceso.
                             <span class="iconoForm centrado material-symbols-outlined">left_click</span>
                         </span>
                     </div>
@@ -145,9 +145,9 @@
             </form>
         </div>
 
-        <div id="cajaFondo" class="cajaFondo absoluto verCen">
+        <div id="cajaFondo" class="cajaFondo absoluto centrado">
             <div id="fondoMalla" class="fondoMalla absoluto max"></div>
-            <div id="cajaSaludo" class="cajaSaludo absoluto verCenAround">
+            <div id="cajaSaludo" class="cajaSaludo absoluto verCenEspaciado">
                 <div id="usuarioSaludo" class="usuarioSaludo centrado relativo"></div>
                 <button id="entrarApp" class="entrar" disabled>Acceder</button>
             </div>
@@ -155,10 +155,11 @@
 
     </div>
 
-    <script type="module" src="./app/public/paginas/landing/nav.js"></script>
-    <script type="module" src="./app/public/paginas/landing/animacion.js"></script>
-    <script src="./app/public/componentes/clases/logo_CC.js" type="module"></script>
-    <script type="module" src="./app/public/paginas/landing/control_form.js"></script>
+    <script type="module" src="./app/public/paginas/landing/scripts/main.js"></script>
+    <script type="module" src="./app/public/componentes/clases/logo_CC.js"></script>
+
+    <script type="module" src="./app/public/paginas/landing/scripts/@saltarLogin.js"></script>
+
 </body>
 
 </html>

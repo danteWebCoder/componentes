@@ -1,7 +1,7 @@
-import { aleatorio } from "./../../modulos/extra.js"
-import { esperar } from "./../../modulos/tiempos.js"
+import { aleatorio } from "./../../../modulos/extra.js"
+import { esperar } from "./../../../modulos/tiempos.js"
 
-const main = async () => {
+export const animacionEngranajes = async () => {
     let acum = Array(3).fill(0)
     const rotar = (item, num) => {
         const incremento = aleatorio(180, 360)
@@ -26,5 +26,3 @@ const main = async () => {
         await esperar(3000)
     }
 }
-
-document.addEventListener("DOMContentLoaded", main)

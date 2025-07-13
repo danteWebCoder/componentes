@@ -1,4 +1,4 @@
-import { traducir } from "./../../modulos/traducir.js"
+import { traducir } from "./../../../modulos/traducir.js"
 
 const abrirIdiomas = () => {
     const caja = document.getElementById("cajaIdiomas")
@@ -20,7 +20,7 @@ const cerrarIdiomas = () => {
     console.log("cerrar")
 }
 
-const mainNav = () => {
+export const nav = () => {
     const opciones = Array.from(document.querySelectorAll(".opcionNav"))
     opciones.forEach(item => {
         item.addEventListener("click", () => {
@@ -36,5 +36,3 @@ const mainNav = () => {
         })
     })
 }
-
-mainNav()
