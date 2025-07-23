@@ -1,343 +1,143 @@
-:root {
-    --formPadding: 14px;
-    --formAlto: 100%;
-    --formAncho: 100%;
-    --colorForm: rgba(0, 0, 0, 0.5);
-    --blancoForm: rgba(255, 255, 255, .8);
-    --colorInputText: rgba(0, 0, 0, 0.5);
-    --transicionGeneral: .1s;
-    --transicionModal: .5s;
+@import "./../../../comunes/styles/clases.css";
+@import "./../../../comunes/styles/confGlobal.css";
+
+* {
+    color: grey;
 }
 
-.modalOculto {
-    z-index: -1;
-    opacity: 0;
+:host {
+    --contenidoPadding: 14px;
+    --contenidoAlto: 500px;
+    --contenidoAncho: 800px;
+    --fondoForm: rgb(230, 230, 230);
+    --textoActivado: rgb(60, 60, 60);
+    --textoDesactivado: rgb(200, 200, 200);
+
+    position: relative;
 }
 
-.modalVisible {
-    z-index: 1;
-    opacity: 1;
-}
+.cajaContenido {
+    width: var(--contenidoAncho);
+    height: var(--contenidoAlto);
+    background-color: var(--fondoForm);
+    overflow: hidden;
 
-.modal {
-    position: absolute;
-    background-color: rgba(0, 0, 0, .4);
-    backdrop-filter: blur(16px);
-    transition: var(--transicionModal);
+    form {
+        padding: 20px;
 
-    .cajaForm {
-        width: var(--formAncho);
-        height: var(--formAlto);
+        .cajaTipos {
+            width: 100%;
+            height: 70px;
 
-        form {
-            width: 580px;
-            height: 90%;
-            padding: 60px;
-            background-color: rgba(0, 0, 0, 0.63);
-            border-radius: 16px;
+            .tipo {
+                font-size: 16px;
+            }
+
+            .tipo:has(input:checked) {
+                font-size: 30px;
+                color: var(--textoActivado);
+            }
 
             .cerrar {
-                top: 30px;
-                right: 30px;
-                width: 40px;
-                height: 40px;
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                border-radius: 8px;
-                padding: 4px;
+                right: 0;
+                width: 30px;
+                height: 30px;
+                background-color: rgb(206, 206, 206);
+                border-radius: 4px;
                 cursor: pointer;
 
-                &:hover .icono {
-                    color: var(--blancoActivado);
+                &:hover {
+                    background-color: rgb(160, 160, 160);
+                }
+
+                .icono {
+                    color: var(--textoActivado);
                 }
             }
+        }
 
-            .cajaTipos {
+        .cajaTipos:has(.tipo:nth-of-type(1) .inputOculto:checked)+.cajaInputs .campo:last-child {
+            display: none;
+        }
+
+        .cajaInputs {
+            width: 100%;
+            height: calc(100% - 70px - 38px);
+            padding-top: 20px;
+
+            .campo {
                 width: 100%;
-                height: 10%;
-                padding-left: 40px;
+                height: calc(100% / 3.4);
 
-                .tipos {
-                    width: auto;
-                    height: 50px;
-                    font-size: 16px;
-                    margin-left: -46px;
-                    /* compensa el ancho del icono + el margin */
+                .cajaInput {
+                    width: 80%;
+                    height: 40px;
+                    border-left: 1px solid rgb(80, 80, 80);
+                    border-bottom: 1px solid rgb(80, 80, 80);
+                    border-radius: 0 0 0 8px;
 
-                    &:has(.inputOculto:checked) {
-                        font-size: 26px;
-                        color: var(--blancoActivado);
-                    }
-                }
+                    .iconoForm {
+                        height: auto;
+                        width: auto;
+                        cursor: pointer;
+                        margin: 10px;
 
-                &:has(.tipos:first-of-type .inputOculto:checked)+.campos .cajaCampo:nth-of-type(3) .cajaInput {
-                    display: none;
-                }
-
-                &:has(.tipos:last-of-type .inputOculto:checked)+.campos .cajaCampo .noRecuerda {
-                    display: none;
-                }
-            }
-
-            .campos {
-                width: 100%;
-                height: 50%;
-
-                .cajaCampo {
-                    width: 100%;
-                    height: calc(100% / 3);
-
-                    .cajaInput {
-                        display: flex;
-                        width: 100%;
-                        height: 36px;
-                        background-color: var(--blancoForm);
-                        backdrop-filter: blur(4px);
-                        border-radius: 6px;
-
-                        .iconoInput,
-                        .iconoVisibilidad {
-                            width: 40px;
-                            height: 100%;
-                            color: grey;
+                        &:nth-of-type(2) {
+                            opacity: 0;
                             pointer-events: none;
                         }
-
-                        .iconoVisibilidad {
-                            opacity: 0;
-                        }
-
-                        input {
-                            all: unset;
-                            background: transparent !important;
-                            flex: 1;
-                            height: 100%;
-                            color: var(--colorInputText);
-                            border-radius: inherit;
-
-                            &::placeholder {
-                                font-size: 16px;
-                            }
-                        }
                     }
 
-                    .noRecuerda {
-                        width: 100%;
-                        height: auto;
-                        margin-top: 26px;
-                        color: grey;
-                        cursor: pointer;
+                    .inputForm {
+                        all: unset;
+                        flex: 1;
+                        height: 100%;
+                        background-color: transparent;
+                        color: var(--textoActivado);
+                        font-size: 16px;
 
-                        .iconoForm {
-                            font-size: 30px;
-                            margin-left: 8px;
-                            color: rgba(128, 128, 128, 0.8);
-                        }
-
-                        &,
-                        & .iconoForm {
-                            transition: var(--transicionGeneral);
-                        }
-
-                        &:hover,
-                        &:hover .iconoForm {
-                            color: var(--blancoForm);
+                        &::placeholder {
+                            color: rgb(150, 150, 150);
                         }
                     }
                 }
             }
+        }
 
-            .confirmar {
-                width: 100%;
-                height: 10%;
-                justify-content: space-around;
-            }
+        .cajaInferior {
+            display: flex;
+            width: 100%;
+            height: 40px;
 
-            .confirmar .cajaCondiciones {
-                width: auto;
-                height: 30px;
+            .cajaCondiciones {
+                flex: 1;
 
-                .check,
-                .condiciones {
-                    font-size: 14px;
-                    color: grey;
-                    transition: var(--transicionGeneral);
-                }
-
-                &:hover .condiciones,
-                &:hover .check {
-                    color: var(--blancoForm);
-                    border-color: var(--blancoForm);
-                }
-
-                &:has(.inputOculto:checked) .check::after {
-                    content: "check"
-                        /* icono */
+                &:has(.inputOculto:checked) .iconoCheck {
+                    display: flex;
                 }
 
                 .check {
                     width: 20px;
                     height: 20px;
-                    border: 1px solid grey;
-                    border-radius: 4px;
-                    margin-right: 14px;
-                    font-weight: bolder;
+                    margin-left: 10px;
+                    margin-right: 10px;
                 }
-            }
 
-            .enviar {
-                width: 100%;
-                height: 10%;
-                justify-content: space-around;
 
-                .botonForm {
-                    border: none;
-                    width: 120px;
-                    height: 4vh;
-                    background-color: var(--colorBotonDes);
-                    border-radius: 4px;
-                    font-size: 16px;
-                    letter-spacing: 2px;
+                .iconoCheck {
+                    display: none;
+                    font-size: 19px;
+                }
+
+                .condicionesLink {
+                    color: rgb(52, 148, 140);
                     cursor: pointer;
                 }
+            }
 
-                .botonReset {
-                    color: var(--colorTextoBotonDes);
-
-                    &:hover {
-                        background-color: var(--colorBotonAct);
-                        color: var(--colorTextoBotonAct);
-                    }
-                }
-
-                .botonEnviar {
-                    pointer-events: none;
-                    cursor: auto;
-
-                    &:enabled {
-                        background-color: var(--colorBotonAct);
-                        color: var(--colorTextoBotonAct);
-                        pointer-events: auto;
-                        cursor: pointer;
-                    }
-                }
+            .boton2 {
+                margin-left: 30px;
             }
         }
-    }
-
-    .cajaFondo {
-        width: 100%;
-        height: 360px;
-        opacity: 0;
-        background-color: rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(8px);
-        display: none;
-        transition: 1s;
-
-        .fondoMalla {
-            background-image: url("./../../../recursos/imagenes/fondoPuntos.png");
-            background-size: auto;
-            background-repeat: repeat;
-            opacity: 0.6;
-        }
-
-        .cajaSaludo {
-            width: auto;
-            height: 70%;
-
-            .usuarioSaludo {
-                display: flex;
-                width: auto;
-                height: auto;
-                letter-spacing: 5px;
-                font-size: 54px;
-                color: white;
-
-                .saludo {
-                    display: flex;
-                    width: auto;
-                    height: auto;
-                    top: -8px;
-                    left: 2px;
-                    letter-spacing: 2px;
-                    font-size: 16px;
-                }
-            }
-
-            .entrar {
-                border: none;
-                width: 120px;
-                height: 4vh;
-                background-color: var(--colorBotonDes);
-                border-radius: 4px;
-                font-size: 16px;
-                letter-spacing: 2px;
-                cursor: auto;
-                pointer-events: none;
-            }
-
-            .activado {
-                background-color: var(--colorBotonAct);
-                color: var(--colorTextoBotonAct);
-                pointer-events: auto;
-                cursor: pointer;
-                transition: 0.5s;
-            }
-
-            .cajaIndicador {
-                width: 600px;
-                height: auto;
-
-                .indicador {
-                    top: 26px;
-                    width: 100%;
-                    height: 80px;
-
-                    .marca {
-                        background-color: white;
-                        opacity: 0.04;
-                        border-radius: 12px;
-                        transform: translateY(20px);
-                        box-shadow: 0 0 12px transparent;
-                        animation: ola 4.5s infinite ease-in-out;
-                    }
-                }
-            }
-        }
-    }
-}
-
-@keyframes ola {
-    0% {
-        opacity: 0.04;
-        transform: translateY(20px);
-        background-color: white;
-        box-shadow: 0 0 12px transparent;
-    }
-
-    45% {
-        box-shadow: 0 0 8px cyan;
-    }
-
-    50% {
-        opacity: 1;
-        transform: translateY(-20px);
-        box-shadow:
-            0 0 30px white,
-            0 0 20px white,
-            0 0 12px white,
-            0 0 8px white,
-            0 0 6px white,
-            0 0 4px white;
-    }
-
-    55% {
-        box-shadow: 0 0 8px cyan;
-    }
-
-    100% {
-        opacity: 0.04;
-        transform: translateY(20px);
-        background-color: white;
-        box-shadow: 0 0 12px transparent;
     }
 }

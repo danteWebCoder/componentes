@@ -1,35 +1,31 @@
-import { traducir } from "./../../../comunes/scripts/modulos/traducir.js"
-
-const abrirIdiomas = () => {
-    const caja = document.getElementById("cajaIdiomas")
+const abrirIdiomas = (dom) => {
+    const caja = dom.getElementById("cajaIdiomas")
     caja.style.display = getComputedStyle(caja).display === "none"
         ? "flex"
         : "none"
-    idiomas.classList.toggle("seleccionada")
-    console.log("abrir")
+    caja.classList.toggle("seleccionada")
 }
 
-const cerrarIdiomas = () => {
-    const opcIdiomas = document.getElementById("idiomas")
-    const caja = document.getElementById("cajaIdiomas")
+const cerrarIdiomas = (dom) => {
+    const opcIdiomas = dom.getElementById("idiomas")
+    const caja = dom.getElementById("cajaIdiomas")
     const valorDisplay = getComputedStyle(caja).display
     if (valorDisplay) {
         caja.style.display = "none"
-        idiomas.classList.remove("seleccionada")
+        caja.classList.remove("seleccionada")
     }
-    console.log("cerrar")
 }
 
-export const nav = () => {
-    const opciones = Array.from(document.querySelectorAll(".opcionNav"))
+export const controlNav = (dom) => {
+    const opciones = Array.from(dom.querySelectorAll(".opcionNav"))
     opciones.forEach(item => {
         item.addEventListener("click", () => {
-            if (item.id !== "idiomas") cerrarIdiomas()
-            if (item.id === "idiomas") abrirIdiomas()
+            if (item.id !== "idiomas") cerrarIdiomas(dom)
+            if (item.id === "idiomas") abrirIdiomas(dom)
         })
     })
 
-    const idiomas = Array.from(document.querySelectorAll("#cajaIdiomas .inputOculto"))
+    const idiomas = Array.from(dom.querySelectorAll("#cajaIdiomas .inputOculto"))
     idiomas.forEach(item => {
         item.addEventListener("click", () => {
             console.log(idiomas.find(item => item.checked).id)

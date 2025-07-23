@@ -1,14 +1,14 @@
 import { iniciarLogin } from "./saludo.js"
-import * as eventos from "./../../../comunes/scripts/modulos/eventos.js"
-
+/* import * as eventos from "../../../comunes/scripts/modulos/eventos.js"
+ */
 const minChar = 4 /* caracteres minimos */
 
-const controlModal = (modal, arrayEventos) => {
+const controlModal = (modal) => {
     const botonLogin = document.getElementById("login")
     const botonComenzar = document.getElementById("comenzar")
 
     const botonesApertura = [botonLogin, botonComenzar]
-    botonesApertura.forEach(item => eventos.crear(arrayEventos, item, "click", () => modal.classList.toggle("modalVisible")))
+    botonesApertura.forEach(item => crearEvento(arrayEventos, item, "click", () => modal.classList.toggle("modalVisible")))
 
     const botonCerrar = document.getElementById("cerrar")
     eventos.crear(arrayEventos, botonCerrar, "click", () => modal.classList.toggle("modalVisible"))
@@ -104,8 +104,8 @@ const restaurarError = (item) => {
 const resetCampos = (campos) => { campos.forEach(item => restaurarError(item)) }
 
 /* MAIN ------------------------------------------------------------------------------------- */
-export const controlForm = (arrayEventos) => {
-    console.log(arrayEventos)
+export const controlForm = (dom) => {
+    console.log(dom)
     const modal = document.getElementById("modal")
     const camposForm = Array.from(document.querySelectorAll(".campo"))
     const inputsForm = [...camposForm, document.getElementById("condiciones")]
