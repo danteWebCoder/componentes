@@ -86,9 +86,9 @@ const procesarDatos = (datos, campos) => {
 }
 
 const marcarError = (item, text) => {
+    const color = getComputedStyle(document.documentElement).getPropertyValue("--textoActivado")
     item.value = text
     if (item.id === "password" || item.id === "passwordConfirmado") item.type = "text"
-    item.style.color = "rgb(180, 50, 50)"
 }
 
 const restaurarError = (item) => {

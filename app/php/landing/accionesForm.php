@@ -13,30 +13,31 @@
     $datos["tipo"] = $tipo;
 
     if ($tipo === "login") {
-        if (is_array($respuesta)) {
-            $validarcorreo = $respuesta["correo"] === $correo ? true : false;
-            $validarPass = $respuesta["pass"] === $password ? true : false;
-            $datos["correo"] = $validarcorreo;
-            $datos["pass"] = $validarPass;
+        if (!$respuesta) {
+            $datos["correo"] = "noExiste";
+            $datos["pass"] = "noExiste";
 
             if ($datos["correo"] && $datos["pass"]) {
 
             }
         } else {
-            $datos["correo"] = false;
-            $datos["pass"] = false;
+            $validarcorreo = $respuesta["correo"] === $correo ? "existe" : "noExiste";
+            $validarPass = $respuesta["pass"] === $password ? "correcto" : "incorrecto";
+            $datos["correo"] = $validarcorreo;
+            $datos["pass"] = $validarPass;
         }
     }
 
     if ($tipo === "signUp") {
-        if (is_array($respuesta)) {
-            $datos["correo"] = false;
-            $datos["pass"] = false;
-        } else {
-            $datos["correo"] = true;
-            $datos["pass"] = $password === $password2;
+        $validarPass = $password === $password2 ? "igual" : "diferente";
 
-            if ($datos["pass"]) crearReg(["correo" => $correo, "pass" => $password, "idioma" => $idioma]);
+        if (!$respuesta) {
+            $datos["correo"] = "noExiste";
+            $datos["passRep"] = $validarPass;
+
+            if ($validarPass === "igual") crearReg(["correo" => $correo, "pass" => $password, "idioma" => $idioma]);
+        } else {
+            $datos["correo"] = "existe";
         }
     }
 

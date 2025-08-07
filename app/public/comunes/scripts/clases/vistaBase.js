@@ -42,7 +42,7 @@ export class vistaBase extends HTMLElement {
         this.eliminarEventos()
     }
 
-    disconnectedCallback() {
-        this.destruirVista()
+    renderListo() {
+        console.log(this)
     }
 }

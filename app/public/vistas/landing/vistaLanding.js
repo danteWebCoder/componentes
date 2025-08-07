@@ -92,6 +92,7 @@ export class vistaLanding extends vistaBase {
             modal.classList.remove("modalOculto")
             modal.focus()
             modal.classList.add("modalVisible")
+            modal.setAttribute("visible", true)
         }
 
             ;[botonLogin, botonComenzar].forEach(item => {

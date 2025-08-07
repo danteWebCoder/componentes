@@ -2,16 +2,16 @@
 @import "./../../../comunes/styles/confGlobal.css";
 
 * {
-    color: grey;
+    color: rgb(80, 80, 80);
 }
 
 :host {
     --contenidoPadding: 14px;
     --contenidoAlto: 500px;
     --contenidoAncho: 800px;
-    --fondoForm: rgb(230, 230, 230);
     --textoActivado: rgb(60, 60, 60);
     --textoDesactivado: rgb(200, 200, 200);
+    --colorEnfasis: rgb(0, 189, 177);
 
     position: relative;
 }
@@ -19,10 +19,17 @@
 .cajaContenido {
     width: var(--contenidoAncho);
     height: var(--contenidoAlto);
-    background-color: var(--fondoForm);
+    background-color: white;
     overflow: hidden;
 
+    .cajaComponente {
+        width: 140%;
+        height: 140%;
+        border: 1px solid red;
+    }
+
     form {
+        top: 0;
         padding: 20px;
 
         .cajaTipos {
@@ -57,17 +64,32 @@
         }
 
         .cajaTipos:has(.tipo:nth-of-type(1) .inputOculto:checked)+.cajaInputs .campo:last-child {
-            display: none;
+            height: 0;
+            opacity: 0;
         }
 
         .cajaInputs {
             width: 100%;
-            height: calc(100% - 70px - 38px);
-            padding-top: 20px;
+            height: calc(70%);
+            overflow: hidden;
 
             .campo {
                 width: 100%;
                 height: calc(100% / 3.4);
+                overflow: hidden;
+
+                &:last-of-type {
+                    opacity: 1;
+                    transition: 0.3s ease-in-out;
+                }
+
+                .fondoInput {
+                    width: 65%;
+                    height: 30px;
+                    background-color: rgb(60, 60, 60);
+                    border-radius: 4px;
+
+                }
 
                 .cajaInput {
                     width: 80%;
@@ -78,7 +100,7 @@
 
                     .iconoForm {
                         height: auto;
-                        width: auto;
+                        width: 26px;
                         cursor: pointer;
                         margin: 10px;
 
@@ -88,17 +110,27 @@
                         }
                     }
 
+                    input[type="password"]::-ms-reveal {
+                        display: none;
+                    }
+
                     .inputForm {
                         all: unset;
                         flex: 1;
                         height: 100%;
-                        background-color: transparent;
-                        color: var(--textoActivado);
-                        font-size: 16px;
+                        font-size: 14px;
+                        font-family: "Walter Turncoat";
+                        letter-spacing: 4px;
+                        text-indent: 12px;
+                        color: white;
 
                         &::placeholder {
-                            color: rgb(150, 150, 150);
+                            color:rgb(180, 180, 180)
                         }
+                    }
+
+                    .error {
+                        color: rgb(180, 50, 50);
                     }
                 }
             }
@@ -130,7 +162,7 @@
                 }
 
                 .condicionesLink {
-                    color: rgb(52, 148, 140);
+                    color: var(--colorEnfasis);
                     cursor: pointer;
                 }
             }

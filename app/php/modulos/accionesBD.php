@@ -1,5 +1,5 @@
 <?php
-function consulta($item, $valor) {
+function conectarBD() {
     $config = json_decode(file_get_contents("./../_configuracion.json"), true);
     $nombreBD = $config["BD"]["base"];
     $BD = $config[$nombreBD];
@@ -7,10 +7,17 @@ function consulta($item, $valor) {
     $userBD = $BD["user"];
     $passBD = $BD["pass"];
     $tableBD = $BD["table"];
-
     $conexion = mysqli_connect($serverBD, $userBD, $passBD, $nombreBD) or die("Error al conectar con la base de datos");
+    return [$conexion, $tableBD];
+}
+
+function consulta($item, $valor) {
+    $datos = conectarBD();
+    $conexion = $datos[0];
+    $tabla = $datos[1];
+    
     $query = mysqli_query($conexion, "select id, correo, pass, idioma 
-        FROM $tableBD WHERE $item = '$valor'")
+        FROM $tabla WHERE $item = '$valor'")
         or die(mysqli_error($conexion));
 
     $datosConsulta = mysqli_fetch_assoc($query);
@@ -19,23 +26,19 @@ function consulta($item, $valor) {
 }
 
 function crearReg($array) {
-    $config = json_decode(file_get_contents("./../_configuracion.json"), true);
-    $nombreBD = $config[$config["BD"]["base"]];
-    $BD = $config[$nombreBD];
-    $serverBD = $BD["server"];
-    $userBD = $BD["user"];
-    $passBD = $BD["pass"];
-    $tableBD = $BD["table"];
-
+    $datos = conectarBD();
+    $conexion = $datos[0];
+    $tabla = $datos[1];
+    
     $datosCorreo = $array["correo"];
     $datosPass = $array["pass"];
     $datosIdioma = $array["idioma"];    
-    $datosFechaAlta = date("Y-m-d");
+    $datosFechaAlta = date("Y-m-d H:i:s");
 
-    $conexion = mysqli_connect($serverBD, $userBD, $passBD, $nombreBD) or die("Error al conectar con la base de datos");
-    $query = mysqli_query($conexion, "insert into $tableBD(correo, pass, idioma, alta) 
+    $query = mysqli_query($conexion, "insert into $tabla (correo, pass, idioma, fecha_alta) 
         VALUES ('$datosCorreo', '$datosPass', '$datosIdioma', '$datosFechaAlta')")
         or die(mysqli_error($conexion));
-}
 
+    mysqli_close($conexion);
+}
 ?>
