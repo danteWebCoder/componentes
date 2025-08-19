@@ -49,16 +49,12 @@
                 right: 0;
                 width: 30px;
                 height: 30px;
-                background-color: rgb(206, 206, 206);
                 border-radius: 4px;
                 cursor: pointer;
+                font-family: "Walter Turncoat";
 
                 &:hover {
-                    background-color: rgb(160, 160, 160);
-                }
-
-                .icono {
-                    color: var(--textoActivado);
+                    background-color: rgb(80, 80, 80);
                 }
             }
         }
@@ -93,9 +89,9 @@
 
                 .cajaInput {
                     width: 80%;
-                    height: 40px;
-                    border-left: 1px solid rgb(80, 80, 80);
-                    border-bottom: 1px solid rgb(80, 80, 80);
+                    height: 60px;
+                    border-left: 1px solid rgb(180, 180, 180);
+                    border-bottom: 1px solid rgb(180, 180, 180);
                     border-radius: 0 0 0 8px;
 
                     .iconoForm {
@@ -125,12 +121,12 @@
                         color: white;
 
                         &::placeholder {
-                            color:rgb(180, 180, 180)
+                            color: rgb(180, 180, 180)
                         }
                     }
 
                     .error {
-                        color: rgb(180, 50, 50);
+                        color: rgb(255, 114, 114);
                     }
                 }
             }

@@ -10,6 +10,8 @@ export const enviarForm = async (tipo, campos) => {
 }
 
 export const fetchConsulta = async (url, parametros) => {
+        console.log(url, parametros)
+
     let datos
     try {
         const datosRecibidos = await fetch(
@@ -19,6 +21,8 @@ export const fetchConsulta = async (url, parametros) => {
             body: parametros
         })
         datos = await datosRecibidos.text()
+
+        console.log(datos)
     } catch (error) {
         console.log(error)
     }

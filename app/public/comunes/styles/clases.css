@@ -161,17 +161,16 @@
     width: 120px;
     height: 38px;
     border-radius: 4px;
-    background-color: rgb(80, 80, 80);
+    background-color: rgb(220, 220, 220);
+    color: rgb(80, 80, 80);
     font-size: 16px;
     letter-spacing: 1px;
-    color: rgb(220, 220, 220);
     cursor: pointer;
     transition: .1s;
 
     &:hover {
-        background-color: rgb(220, 220, 220);
-        color: rgb(80, 80, 80);
-        color: grey;
+        background-color: rgb(80, 80, 80);
+        color: rgb(200, 200, 200);
     }
 }
 
@@ -183,21 +182,22 @@
     letter-spacing: 1px;
     cursor: pointer;
     transition: .1s;
-}
-
-.boton2Des {
-    pointer-events: none;
-    background-color: rgb(220, 220, 220);
-    color: rgb(80, 80, 80);
 
 }
 
-.boton2Act {
-    pointer-events: auto;
+.boton2Color {
     background-color: rgb(80, 80, 80);
     color: rgb(200, 200, 200);
 
     &:hover {
+        pointer-events: auto;
         color: white;
     }
+}
+
+.boton2Des {
+    pointer-events: none;
+    background-color: rgb(255, 255, 255);
+    color: rgb(80, 80, 80);
+    border: 1px solid rgb(180, 180, 180);
 }

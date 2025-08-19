@@ -23,9 +23,7 @@ export class modal extends vistaBase {
                     <span class="tipo relativo">Crear una cuenta nueva
                         <input class="inputOculto" type="radio" name="tipo" value="signUp">
                     </span>
-                    <div id="cerrarModal" class="cerrar centrado absoluto">
-                        <span class="icono material-symbols-outlined">close</span>
-                    </div>
+                    <div id="cerrarModal" class="cerrar boton2Color centrado absoluto">X</div>
                 </section>
 
                 <section class="cajaInputs">
@@ -63,8 +61,8 @@ export class modal extends vistaBase {
                         </span>
                         <span class="condicionestexto">Acepto los<span class="condicionesLink"> terminos y condiciones </span>de uso</span>
                     </div>
-                    <span id="botonReset" class="boton2 boton2Des centrado">Borrar</span>
-                    <span id="botonEnvio" class="boton2 boton2Des centrado">Enviar</span>
+                    <span id="botonReset" class="boton2 boton2Color centrado">Resetear</span>
+                    <span id="botonEnvio" class="boton2 boton2Color centrado">Enviar</span>
                 </section>
             </form>
         </div>
@@ -72,13 +70,14 @@ export class modal extends vistaBase {
 
         this.cajaComponente = this.dom.querySelector("#cajaComponente")
         this.componente = crearElemento(this.cajaComponente, "fondo-burbujas", null, null, {
-            burbujas: 40,
-            size: 80,
+            burbujas: 60,
+            size: 200,
             tempo: 8,
             color: "rgba(80, 80, 80, 0.10)",
+            enfasis: "rgba(0, 0, 0, 0.2)",
             fondo: "white",
-            difuminado: 10,
-            animado: false
+            difuminado: 6,
+            activo: false
         })
     }
 
@@ -102,7 +101,9 @@ export class modal extends vistaBase {
 
     attributeChangedCallback(atributo, valor, nuevoValor) {
         console.log("modal visible: " + nuevoValor)
-        this.componente.setAttribute("visible", true)
+        nuevoValor === "true"
+            ? this.componente.setAttribute("activo", true)
+            : this.componente.setAttribute("activo", false)
     }
 
 }

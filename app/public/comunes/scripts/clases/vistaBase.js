@@ -38,11 +38,14 @@ export class vistaBase extends HTMLElement {
         vistaBase.eventos.length = 0
     }
 
-    destruirVista() {
-        this.eliminarEventos()
+    eliminarEventoSimple(obj, accion) {
+        const evento = vistaBase.eventos.find(item => item.elemento === obj && item.accion === accion)
+        const index = vistaBase.eventos.findIndex(item => item.elemento === obj && item.accion === accion)
+        evento.elemento.removeEventListener(evento.accion, evento.callback)
+        vistaBase.eventos.splice(index, 1)
     }
 
-    renderListo() {
-        console.log(this)
+    destruirVista() {
+        this.eliminarEventos()
     }
 }

@@ -17,36 +17,44 @@ const cambiarVisibilidad = (item) => {
     input.type = input.type === "password" ? "text" : "password"
 }
 
-const actDesBotonEnvio = (boton, accion) => {
-    if (accion === "activar") boton.classList.add("boton2Act")
-    if (accion === "desactivar") boton.classList.remove("boton2Act")
+const actDesBoton = (boton, accion) => {
+    if (accion === "activar") boton.classList.remove("boton2Des")
+    if (accion === "desactivar") boton.classList.add("boton2Des")
 }
 
 const comprobarCondiciones = (dom) => {
     return dom.getElementById("condicionesCheck").checked
 }
 
-const comprobarCampos = (dom, inputs, boton) => {
+const comprobarCampos = (dom, inputs, botones) => {
     const tipo = tipoSeleccionado(dom)
     const usuario = inputs[0].value
     const pass = inputs[1].value
     const passRep = inputs[2].value
+    const reset = botones[0]
+    const enviar = botones[1]
 
-    const usuarioValido = (/^.{3,}@.{2,}\.[a-zA-Z0-9]{2,}$/).test(usuario)
+/*     const usuarioValido = (/^.{3,}@.{2,}\.[a-zA-Z0-9]{2,}$/).test(usuario)
+ */
+    const usuarioValido = pass.length >= 5 ? true : false
     const passValido = pass.length >= 5 ? true : false
     const passRepValido = passRep.length >= 5 ? true : false
     const condicionesValido = comprobarCondiciones(dom)
 
+    usuario || pass || passRep
+        ? actDesBoton(reset, "activar")
+        : actDesBoton(reset, "desactivar")
+
     if (tipo === "login") {
         usuarioValido && passValido && condicionesValido
-            ? actDesBotonEnvio(boton, "activar")
-            : actDesBotonEnvio(boton, "desactivar")
+            ? actDesBoton(enviar, "activar")
+            : actDesBoton(enviar, "desactivar")
     }
 
     if (tipo === "signUp") {
         usuarioValido && passValido && passRepValido && condicionesValido
-            ? actDesBotonEnvio(boton, "activar")
-            : actDesBotonEnvio(boton, "desactivar")
+            ? actDesBoton(enviar, "activar")
+            : actDesBoton(enviar, "desactivar")
     }
 }
 
@@ -61,8 +69,7 @@ const marcarError = (item, text) => {
 }
 
 const desmarcarError = (item) => {
-/*     console.log(item)
- */    if (item.classList.contains("error")) {
+    if (item.classList.contains("error")) {
         item.classList.remove("error")
         item.value = ""
         if (item.id.startsWith("pass")) {
@@ -88,18 +95,20 @@ export const mainControlForm = async (dom, clase) => {
     const inputsPass = inputsForm.filter(item => item.type === "password")
     const botonEnvio = dom.getElementById("botonEnvio")
     const botonReset = dom.getElementById("botonReset")
+    const botones = [botonReset, botonEnvio]
 
-    comprobarCampos(dom, inputsCampo, botonEnvio)
+    comprobarCampos(dom, inputsCampo, botones)
 
     /* CONTROL FORM */
     inputsPass.forEach(item => clase.crearEvento(item, "input", () => activarIconos(item)))
     iconosVisibilidad.forEach(item => clase.crearEvento(item, "click", () => cambiarVisibilidad(item)))
-    inputsForm.forEach(item => clase.crearEvento(item, "input", () => { comprobarCampos(dom, inputsCampo, botonEnvio) }))
+    inputsForm.forEach(item => clase.crearEvento(item, "input", () => { comprobarCampos(dom, inputsCampo, botones) }))
     inputsForm.forEach(item => clase.crearEvento(item, "click", () => { desmarcarError(item) }))
     clase.crearEvento(botonReset, "click", () => dom.getElementById("formLanding").reset())
 
     /* CONTROL ENVIO y RECEPCION DATOS */
     clase.crearEvento(botonEnvio, "click", async () => {
+        console.log("click enviar form")
         const respuestaServidor = await datos.enviarForm(tipoSeleccionado(dom), inputsCampo)
         console.log(respuestaServidor)
         revisarForm(inputsCampo, respuestaServidor)

@@ -1,7 +1,8 @@
+import { vistaBase } from "../../clases/vistaBase.js"
 import { crearElemento } from "../../modulos/crearElemento.js"
 import { aleatorio } from "../../modulos/extra.js"
 
-export class fondoBurbujas extends HTMLElement {
+export class fondoBurbujas extends vistaBase {
     constructor() {
         super()
         this.dom = this.attachShadow({ mode: "open" })
@@ -47,27 +48,32 @@ export class fondoBurbujas extends HTMLElement {
     }
 
     leerConfig() {
-        const burbujas = this.getAttribute("burbujas") ? Number(this.getAttribute("burbujas")) : null
-        const tempo = this.getAttribute("tempo") ? Number(this.getAttribute("tempo")) : null
-        const size = this.getAttribute("size") ? Number(this.getAttribute("size")) : null
-        const color = this.getAttribute("color") ? this.getAttribute("color") : null
-        const difuminado = this.getAttribute("difuminado") ? Number(this.getAttribute("difuminado")) : null
-        this.configuracion = [burbujas, tempo, size, color, difuminado]
+        const burbujas = this.getAttribute("burbujas") ? Number(this.getAttribute("burbujas")) : 10
+        const tempo = this.getAttribute("tempo") ? Number(this.getAttribute("tempo")) : 10
+        const size = this.getAttribute("size") ? Number(this.getAttribute("size")) : 100
+        const color = this.getAttribute("color") ? this.getAttribute("color") : "black"
+        const enfasis = this.getAttribute("enfasis") ? this.getAttribute("enfasis") : "red"
+        const difuminado = this.getAttribute("difuminado") ? Number(this.getAttribute("difuminado")) : 0
+        const activo = this.getAttribute("activo") ? this.getAttribute("activo") : false
+        this.configuracion = [burbujas, tempo, size, color, enfasis, difuminado, activo]
     }
 
     async dibujar() {
         const numBurbujas = this.configuracion[0]
         const size = this.configuracion[2]
         const color = this.configuracion[3]
-        const difuminado = this.configuracion[4]
+        const enfasis = this.configuracion[4]
+        const difuminado = this.configuracion[5]
 
         for (let i = 0; i <= numBurbujas; i++) {
-            const resize = aleatorio(size / 1.5, size)
+            const resize = aleatorio(size / 2, size * 0.2)
             const burbuja = crearElemento(this.contenedor, "div", "burbuja")
             burbuja.style.width = `${resize}px`
             burbuja.style.backgroundColor = color
             burbuja.style.filter = `blur(${difuminado}px)`
             this.posicionar(burbuja)
+
+            if (i % 4 === 0) burbuja.style.backgroundColor = enfasis
         }
 
         return this.contenedor.querySelectorAll(".burbuja")
@@ -96,18 +102,24 @@ export class fondoBurbujas extends HTMLElement {
         return await this.dibujar(configuracion)
     }
 
-    static get observedAttributes() { return ["visible"] }
+    static get observedAttributes() { return ["activo"] }
 
     async attributeChangedCallback(atributo, valor, nuevoValor) {
         console.log("componente visibilidad: " + nuevoValor)
-        const tempo = this.configuracion[1]
 
-        for (const item of this.arrayElementos) {
-            item.style.opacity = 1
-            item.style.transition = `${aleatorio(tempo * 0.5, tempo * 2)}s ease-in-out`
-            this.moverBurbujas(item)
-/*             await esperar(100)
- */            item.addEventListener("transitionend", () => this.moverBurbujas(item))
+        if (nuevoValor === "true") {
+            const tempo = this.configuracion[1]
+
+            for (const item of this.arrayElementos) {
+                item.style.opacity = 1
+                item.style.transition = `${aleatorio(tempo * 0.5, tempo * 2)}s ease-in-out`
+                this.moverBurbujas(item)
+                this.crearEvento(item, "transitionend", () => this.moverBurbujas(item))
+            }
+        } else if (this.arrayElementos) {
+            for (const item of this.arrayElementos) {
+                this.eliminarEventoSimple(item, "transitionend")
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 import { vistaBase } from "../../comunes/scripts/clases/vistaBase.js"
-import { animacionEngranajes } from "./scripts/animacion.js"
+import { animacionEngranajes } from "./scripts/animacionEngranajes.js"
 import { controlNav } from "./scripts/nav.js"
 import { modal } from "./vistaModal.js"
 
