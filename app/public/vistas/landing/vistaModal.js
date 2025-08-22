@@ -23,15 +23,15 @@ export class modal extends vistaBase {
                     <span class="tipo relativo">Crear una cuenta nueva
                         <input class="inputOculto" type="radio" name="tipo" value="signUp">
                     </span>
-                    <div id="cerrarModal" class="cerrar boton2Color centrado absoluto">X</div>
+                    <div id="cerrarModal" class="cerrar boton2 boton2Color centrado absoluto">X</div>
                 </section>
 
-                <section class="cajaInputs">
+                <section class="cajaInputs colCen">
                     <div class="campo centrado">
                         <div class="fondoInput absoluto"></div>
                         <div class="cajaInput rowCenV relativo">
                             <span class="iconoForm centrado material-symbols-outlined">person</span>
-                            <input class="inputForm normal" id="usuarioForm" type="email" placeholder="Escribe tu mail">
+                            <input class="inputForm" id="usuarioForm" type="email" placeholder="Escribe tu mail">
                             <span class="iconoForm"></span>
                         </div>
                     </div>
@@ -39,18 +39,21 @@ export class modal extends vistaBase {
                         <div class="fondoInput absoluto"></div>
                         <div class="cajaInput rowCenV relativo">
                             <span class="iconoForm centrado material-symbols-outlined">lock</span>
-                            <input class="inputForm normal" id="passForm" type="password" placeholder="Escribe tu contraseña">
+                            <input class="inputForm" id="passForm" type="password" placeholder="Escribe tu contraseña">
                             <span class="iconoForm centrado material-symbols-outlined">visibility</span>
                         </div>
                     </div>
-                    <div class="campo centrado">
+
+                    <div id="solicitarPass" class="solicitarPass borderGrisR4 boton2 centrado relativo">He olvidado la contraseña</div>
+
+                    <div class="campo centrado repetirPass">
                         <div class="fondoInput absoluto"></div>
                         <div id="cajaInputRepPass" class="cajaInput rowCenV relativo">
                             <span class="iconoForm centrado material-symbols-outlined">lock</span>
-                            <input class="inputForm normal" id="passRepForm" type="password" placeholder="Repite la contraseña">
+                            <input class="inputForm" id="passRepForm" type="password" placeholder="Repite la contraseña">
                             <span class="iconoForm centrado material-symbols-outlined">visibility</span>
                         </div>
-                    </div>                
+                    </div>    
                 </section>
 
                 <section class="cajaInferior">
@@ -69,7 +72,7 @@ export class modal extends vistaBase {
         `
 
         this.cajaComponente = this.dom.querySelector("#cajaComponente")
-        this.componente = crearElemento(this.cajaComponente, "fondo-burbujas", null, null, {
+/*         this.componente = crearElemento(this.cajaComponente, "fondo-burbujas", null, null, {
             burbujas: 60,
             size: 200,
             tempo: 8,
@@ -79,7 +82,7 @@ export class modal extends vistaBase {
             difuminado: 6,
             activo: false
         })
-    }
+ */    }
 
     connectedCallback() {
 
@@ -100,11 +103,10 @@ export class modal extends vistaBase {
     }
 
     attributeChangedCallback(atributo, valor, nuevoValor) {
-        console.log("modal visible: " + nuevoValor)
         nuevoValor === "true"
-            ? this.componente.setAttribute("activo", true)
+/*             ? this.componente.setAttribute("activo", true)
             : this.componente.setAttribute("activo", false)
-    }
+ */    }
 
 }
 customElements.define("modal-login", modal)

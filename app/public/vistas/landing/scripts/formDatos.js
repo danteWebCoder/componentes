@@ -9,9 +9,15 @@ export const enviarForm = async (tipo, campos) => {
     return await fetchConsulta(url, parametros)
 }
 
-export const fetchConsulta = async (url, parametros) => {
-        console.log(url, parametros)
+export const enviarSolicitudPass = async (mail) => {
+    const parametros = new URLSearchParams()
+    parametros.append("tipo", "passPerdido")
+    parametros.append("correo", mail)
+    const url = "/componentes/app/php/landing/accionesForm.php"
+    return await fetchConsulta(url, parametros)
+}
 
+export const fetchConsulta = async (url, parametros) => {
     let datos
     try {
         const datosRecibidos = await fetch(
@@ -21,8 +27,6 @@ export const fetchConsulta = async (url, parametros) => {
             body: parametros
         })
         datos = await datosRecibidos.text()
-
-        console.log(datos)
     } catch (error) {
         console.log(error)
     }

@@ -105,8 +105,6 @@ export class fondoBurbujas extends vistaBase {
     static get observedAttributes() { return ["activo"] }
 
     async attributeChangedCallback(atributo, valor, nuevoValor) {
-        console.log("componente visibilidad: " + nuevoValor)
-
         if (nuevoValor === "true") {
             const tempo = this.configuracion[1]
 

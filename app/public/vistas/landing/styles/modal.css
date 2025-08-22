@@ -12,6 +12,7 @@
     --textoActivado: rgb(60, 60, 60);
     --textoDesactivado: rgb(200, 200, 200);
     --colorEnfasis: rgb(0, 189, 177);
+    --grisOscuro: rgba(0, 0, 0, 0.76);
 
     position: relative;
 }
@@ -47,19 +48,20 @@
 
             .cerrar {
                 right: 0;
-                width: 30px;
+                width: 32px;
                 height: 30px;
                 border-radius: 4px;
-                cursor: pointer;
                 font-family: "Walter Turncoat";
-
-                &:hover {
-                    background-color: rgb(80, 80, 80);
-                }
             }
         }
 
-        .cajaTipos:has(.tipo:nth-of-type(1) .inputOculto:checked)+.cajaInputs .campo:last-child {
+        .cajaTipos:has(.tipo:nth-of-type(1) .inputOculto:not(:checked))+.cajaInputs .solicitarPass {
+            height: 0;
+            opacity: 0;
+            transition: 0.4s;
+        }
+
+        .cajaTipos:has(.tipo:nth-of-type(1) .inputOculto:checked)+.cajaInputs .repetirPass {
             height: 0;
             opacity: 0;
         }
@@ -76,15 +78,14 @@
 
                 &:last-of-type {
                     opacity: 1;
-                    transition: 0.3s ease-in-out;
+                    transition: 0.4s ease-in-out;
                 }
 
                 .fondoInput {
                     width: 65%;
                     height: 30px;
-                    background-color: rgb(60, 60, 60);
+                    background-color: var(--grisOscuro);
                     border-radius: 4px;
-
                 }
 
                 .cajaInput {
@@ -121,7 +122,7 @@
                         color: white;
 
                         &::placeholder {
-                            color: rgb(180, 180, 180)
+                            color: rgb(180, 180, 180);
                         }
                     }
 
@@ -129,6 +130,18 @@
                         color: rgb(255, 114, 114);
                     }
                 }
+            }
+
+            .solicitarPass {
+                z-index: 1;
+                top: 30px;
+                border-radius: 6px;
+                width: fit-content;
+                height: 30px;
+                padding: 0 20px;
+                overflow: hidden;
+                pointer-events: none;
+                transition: 0.2s 0.4s;
             }
         }
 
@@ -164,6 +177,8 @@
             }
 
             .boton2 {
+                width: 100px;
+                height: 34px;
                 margin-left: 30px;
             }
         }

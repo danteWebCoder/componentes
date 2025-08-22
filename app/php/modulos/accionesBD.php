@@ -1,6 +1,6 @@
 <?php
 function conectarBD() {
-    $config = json_decode(file_get_contents("./../_configuracion.json"), true);
+    $config = json_decode(file_get_contents("./../_configuracionBD.json"), true);
     $nombreBD = $config["BD"]["base"];
     $BD = $config[$nombreBD];
     $serverBD = $BD["server"];
