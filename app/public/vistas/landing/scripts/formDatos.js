@@ -1,3 +1,5 @@
+import { urlServidor} from "/componentes/configuracionUrlServer.js"
+
 export const enviarForm = async (tipo, campos) => {
     const parametros = new URLSearchParams()
     parametros.append("tipo", tipo)
@@ -5,7 +7,7 @@ export const enviarForm = async (tipo, campos) => {
     parametros.append("pass", campos[1].value)
     parametros.append("pass2", campos[2].value)
     parametros.append("idioma", document.querySelector("vista-landing").shadowRoot.querySelector(".cajaIdiomas .inputOculto:checked").id)
-    const url = "/componentes/app/php/landing/accionesForm.php"
+    const url = urlServidor + "/componentes/app/php/landing/accionesForm.php"
     return await fetchConsulta(url, parametros)
 }
 
@@ -13,7 +15,7 @@ export const enviarSolicitudPass = async (mail) => {
     const parametros = new URLSearchParams()
     parametros.append("tipo", "passPerdido")
     parametros.append("correo", mail)
-    const url = "/componentes/app/php/landing/accionesForm.php"
+    const url = urlServidor + "/componentes/app/php/landing/accionesForm.php"
     return await fetchConsulta(url, parametros)
 }
 
