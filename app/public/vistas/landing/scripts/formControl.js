@@ -1,5 +1,7 @@
 import { vistaBase } from "./../../../comunes/scripts/clases/vistaBase.js" /* para debug */
 import * as datos from "./formDatos.js"
+import { crearElemento } from "./../../../comunes/scripts/modulos/crearElemento.js"
+import { esperar } from "./../../../comunes/scripts/modulos/tiempos.js"
 
 const tipoSeleccionado = (dom) => {
     return Array.from(dom.querySelectorAll(".tipo .inputOculto")).find(item => item.checked === true).value
@@ -93,10 +95,25 @@ const desmarcarError = (item) => {
 
 const revisarForm = (campos, respuestaServidor) => {
     const respuesta = JSON.parse(respuestaServidor)
-    if (respuesta.tipo === "login" && respuesta.correo !== "existe") { marcarError(campos[0], "El correo no existe"); return }
-    if (respuesta.tipo === "login" && respuesta.pass === "incorrecto") { marcarError(campos[1], "Contraseña incorrecta"); return }
-    if (respuesta.tipo === "signUp" && respuesta.correo === "existe") { marcarError(campos[0], "Este correo ya esta registrado"); return }
-    if (respuesta.tipo === "signUp" && respuesta.passRep === "diferente") { marcarError(campos[2], "Las contaseñas no coinciden"); return }
+    if (respuesta.tipo === "login" && respuesta.correo === false) { marcarError(campos[0], "El correo no existe"); return }
+    if (respuesta.tipo === "login" && respuesta.pass === false) { marcarError(campos[1], "Contraseña incorrecta"); return }
+    if (respuesta.tipo === "signUp" && respuesta.correo === true) { marcarError(campos[0], "Este correo ya esta registrado"); return }
+    if (respuesta.tipo === "signUp" && respuesta.passRep === false) { marcarError(campos[2], "Las contaseñas no coinciden"); return }
+}
+
+const solicitarPass = async (respuesta, input, boton) => {
+    const cuenta = JSON.parse(respuesta)["correo"]
+    actDesBoton(boton, "desactivar")
+    if (!cuenta) {
+        marcarError(input, "Esta cuenta no existe")
+    } else {
+        boton.style.color = "transparent"
+        boton.style.width = "80%"
+        boton.style.transition = "0.5s"
+        await esperar(500)
+        boton.textContent = "Solicitud de contraseña aceptada, revisa tu bandeja de entrada."
+        boton.style.color = "grey"
+    }
 }
 
 export const mainControlForm = async (dom, clase) => {
@@ -118,12 +135,16 @@ export const mainControlForm = async (dom, clase) => {
     inputsForm.forEach(item => clase.crearEvento(item, "input", () => { comprobarCampos(dom, inputsCampo, botones) }))
     inputsForm.forEach(item => clase.crearEvento(item, "click", () => { desmarcarError(item) }))
     clase.crearEvento(botonReset, "click", () => dom.getElementById("formLanding").reset())
-    clase.crearEvento(botonSolicitarPass, "click", () => { solicitarPass() })
 
     /* CONTROL ENVIO y RECEPCION DATOS */
     clase.crearEvento(botonEnvio, "click", async () => {
         const respuestaServidor = await datos.enviarForm(tipoSeleccionado(dom), inputsCampo)
         console.log(respuestaServidor)
         revisarForm(inputsCampo, respuestaServidor)
+    })
+    clase.crearEvento(botonSolicitarPass, "click", async () => {
+        const respuestaServidor = await datos.enviarSolicitudPass(inputsCampo[0].value)
+        console.log(respuestaServidor)
+        solicitarPass(respuestaServidor, inputsCampo[0], botonSolicitarPass)
     })
 }

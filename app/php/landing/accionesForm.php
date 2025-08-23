@@ -3,42 +3,33 @@
     
     $tipo = $_POST["tipo"];
     $correo = $_POST["correo"];
-    $password = $_POST["pass"];
-    $password2 = $_POST["pass2"];
-    $idioma = $_POST['idioma'];
+    $password = $_POST["pass"] ?? null;
+    $password2 = $_POST["pass2"] ?? null;
+    $idioma = $_POST['idioma'] ?? null;
 
     header("Content-Type: application/json");
     $respuesta = consulta("correo", $correo);
     $datos = [];
     $datos["tipo"] = $tipo;
+    $datos["correo"] = false;
+    $datos["pass"] = false;
+    $datos["passRep"] = false;
 
-    if ($tipo === "login") {
-        if (!$respuesta) {
-            $datos["correo"] = "noExiste";
-            $datos["pass"] = "noExiste";
-
-            if ($datos["correo"] && $datos["pass"]) {
-
-            }
-        } else {
-            $validarcorreo = $respuesta["correo"] === $correo ? "existe" : "noExiste";
-            $validarPass = $respuesta["pass"] === $password ? "correcto" : "incorrecto";
-            $datos["correo"] = $validarcorreo;
-            $datos["pass"] = $validarPass;
-        }
+    if ($tipo === "login" && $respuesta) {
+        $datos["correo"] = true;
+        $datos["pass"] = $respuesta["pass"] === $password ? true : false;
     }
 
-    if ($tipo === "signUp") {
-        $validarPass = $password === $password2 ? "igual" : "diferente";
+    if ($tipo === "signUp" && !$respuesta) {
+        if ($password === $password2) {
+            crearReg(["correo" => $correo, "pass" => $password, "idioma" => $idioma]);
+            $datos["passRep"] = true;
+        } 
+    }
 
-        if (!$respuesta) {
-            $datos["correo"] = "noExiste";
-            $datos["passRep"] = $validarPass;
-
-            if ($validarPass === "igual") crearReg(["correo" => $correo, "pass" => $password, "idioma" => $idioma]);
-        } else {
-            $datos["correo"] = "existe";
-        }
+    if ($tipo === "recuperarPass" && $respuesta) {
+        $datos["correo"] = true;
+        /* llamar a recuperar pass */
     }
 
     echo json_encode($datos);

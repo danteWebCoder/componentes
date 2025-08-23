@@ -13,7 +13,7 @@ export const enviarForm = async (tipo, campos) => {
 
 export const enviarSolicitudPass = async (mail) => {
     const parametros = new URLSearchParams()
-    parametros.append("tipo", "passPerdido")
+    parametros.append("tipo", "recuperarPass")
     parametros.append("correo", mail)
     const url = urlServidor + "/componentes/app/php/landing/accionesForm.php"
     return await fetchConsulta(url, parametros)

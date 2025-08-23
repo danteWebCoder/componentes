@@ -46,7 +46,7 @@ export class modal extends vistaBase {
 
                     <div id="solicitarPass" class="solicitarPass borderGrisR4 boton2 centrado relativo">He olvidado la contraseña</div>
 
-                    <div class="campo centrado repetirPass">
+                    <div id="ultimoCampo" class="campo centrado repetirPass">
                         <div class="fondoInput absoluto"></div>
                         <div id="cajaInputRepPass" class="cajaInput rowCenV relativo">
                             <span class="iconoForm centrado material-symbols-outlined">lock</span>
