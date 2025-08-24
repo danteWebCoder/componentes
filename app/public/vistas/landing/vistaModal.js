@@ -82,20 +82,21 @@ export class modal extends vistaBase {
             difuminado: 6,
             activo: false
         })
- */    }
+ */    } 
 
+ /* REVISAR LOS TIMERS DEL COMPONENTE Y CAMBIARLOS POR METODOS DE CLASE */
     connectedCallback() {
 
         const modal = this
         const cerrar = this.dom.getElementById("cerrarModal")
 
-        this.crearEvento(cerrar, "click", () => {
+        cerrar.addEventListener("click", () => {
             modal.classList.add("modalOculto")
             modal.classList.remove("modalVisible")
             modal.setAttribute("visible", false)
         })
 
-        mainControlForm(this.dom, this)
+        mainControlForm(this.dom)
     }
 
     static get observedAttributes() {

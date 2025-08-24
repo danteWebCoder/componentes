@@ -96,7 +96,7 @@ export class vistaLanding extends vistaBase {
         }
 
             ;[botonLogin, botonComenzar].forEach(item => {
-                this.crearEvento(item, "click", () => { mostrarModal() })
+                item.addEventListener("click", () => { mostrarModal() })
             })
     }
 

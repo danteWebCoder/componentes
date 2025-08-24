@@ -1,6 +1,4 @@
-import { vistaBase } from "./../../../comunes/scripts/clases/vistaBase.js" /* para debug */
 import * as datos from "./formDatos.js"
-import { crearElemento } from "./../../../comunes/scripts/modulos/crearElemento.js"
 import { esperar } from "./../../../comunes/scripts/modulos/tiempos.js"
 
 const tipoSeleccionado = (dom) => {
@@ -116,7 +114,7 @@ const solicitarPass = async (respuesta, input, boton) => {
     }
 }
 
-export const mainControlForm = async (dom, clase) => {
+export const mainControlForm = async (dom) => {
 
     const iconosVisibilidad = Array.from(dom.querySelectorAll(".iconoForm:last-child"))
     const inputsForm = Array.from(dom.querySelectorAll("#formLanding input"))
@@ -130,19 +128,19 @@ export const mainControlForm = async (dom, clase) => {
     comprobarCampos(dom, inputsCampo, botones)
 
     /* CONTROL FORM */
-    inputsPass.forEach(item => clase.crearEvento(item, "input", () => activarIconos(item)))
-    iconosVisibilidad.forEach(item => clase.crearEvento(item, "click", () => cambiarVisibilidad(item)))
-    inputsForm.forEach(item => clase.crearEvento(item, "input", () => { comprobarCampos(dom, inputsCampo, botones) }))
-    inputsForm.forEach(item => clase.crearEvento(item, "click", () => { desmarcarError(item) }))
-    clase.crearEvento(botonReset, "click", () => dom.getElementById("formLanding").reset())
+    inputsPass.forEach(item => item.addEventListener("input", () => activarIconos(item)))
+    iconosVisibilidad.forEach(item => item.addEventListener("click", () => cambiarVisibilidad(item)))
+    inputsForm.forEach(item => item.addEventListener("input", () => { comprobarCampos(dom, inputsCampo, botones) }))
+    inputsForm.forEach(item => item.addEventListener("click", () => { desmarcarError(item) }))
+    botonReset.addEventListener("click", () => dom.getElementById("formLanding").reset())
 
     /* CONTROL ENVIO y RECEPCION DATOS */
-    clase.crearEvento(botonEnvio, "click", async () => {
+    botonEnvio.addEventListener("click", async () => {
         const respuestaServidor = await datos.enviarForm(tipoSeleccionado(dom), inputsCampo)
         console.log(respuestaServidor)
         revisarForm(inputsCampo, respuestaServidor)
     })
-    clase.crearEvento(botonSolicitarPass, "click", async () => {
+    botonSolicitarPass.addEventListener("click", async () => {
         const respuestaServidor = await datos.enviarSolicitudPass(inputsCampo[0].value)
         console.log(respuestaServidor)
         solicitarPass(respuestaServidor, inputsCampo[0], botonSolicitarPass)
