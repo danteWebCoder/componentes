@@ -3,6 +3,5 @@ export const aplicarCss = (elemento, objeto) => {
     Object.entries(objeto).forEach(([clave, valor]) => {
         estilo += (clave + ": " + valor + "; ")
     })
-    console.log(estilo)
     elemento.setAttribute("style", estilo)
 }   

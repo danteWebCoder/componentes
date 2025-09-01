@@ -112,12 +112,12 @@ export class fondoBurbujas extends vistaBase {
                 item.style.opacity = 1
                 item.style.transition = `${aleatorio(tempo * 0.5, tempo * 2)}s ease-in-out`
                 this.moverBurbujas(item)
-                this.crearEvento(item, "transitionend", () => this.moverBurbujas(item))
+                item.addEventListener("transitionend", () => this.moverBurbujas(item))
             }
         } else if (this.arrayElementos) {
             for (const item of this.arrayElementos) {
-                this.eliminarEventoSimple(item, "transitionend")
-            }
+/*                 this.eliminarEventoSimple(item, "transitionend")
+ */            }
         }
     }
 }

@@ -1,4 +1,4 @@
-import { urlServidor} from "/componentes/configuracionUrlServer.js"
+import { urlServidor} from "./../../../../../configuracionUrlServer.js"
 
 export const enviarForm = async (tipo, campos) => {
     const parametros = new URLSearchParams()

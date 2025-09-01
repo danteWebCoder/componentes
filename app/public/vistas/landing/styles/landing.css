@@ -223,4 +223,10 @@
         backdrop-filter: blur(16px);
         transition: var(--transicionModal);
     }
+
+    .cajaCapaSalida {
+        width: 100%;
+        height: 100%;
+        border: 11px solid red;
+    }
 }

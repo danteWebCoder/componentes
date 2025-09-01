@@ -1,15 +1,21 @@
 import { vistaBase } from "../../comunes/scripts/clases/vistaBase.js"
 import { animacionEngranajes } from "./scripts/animacionEngranajes.js"
 import { controlNav } from "./scripts/nav.js"
+import { esperar } from "../../comunes/scripts/modulos/tiempos.js"
+import { crearElemento } from "../../comunes/scripts/modulos/crearElemento.js"
+import { aplicarCss } from "../../comunes/scripts/modulos/aplicarCss.js"
+import * as eventosPers from "../../comunes/scripts/modulos/eventosPersonalizados.js"
+
 import { modal } from "./vistaModal.js"
+import { capaTransicion } from "../../comunes/scripts/componentes/fondos/capaTransicion.js"
 
 export class vistaLanding extends vistaBase {
     constructor() {
         super()
         this.dom = this.attachShadow({ mode: "open" })
-        this.importarCss(this.dom, "./app/public/vistas/landing/styles/index.css")
+        this.importarCss(this.dom, "./app/public/vistas/landing/styles/landing.css")
         this.importarGF(this.dom, "https://fonts.googleapis.com/css2?family=Anta")
-        
+
         this.dom.innerHTML += `
         <header class="header">
             <div id="saltar" class="saltar centrado relativo borderGrisR4">Saltar Login</div>
@@ -87,7 +93,25 @@ export class vistaLanding extends vistaBase {
         const modal = this.dom.getElementById("modal")
         const botonLogin = this.dom.getElementById("botonLogin")
         const botonComenzar = this.dom.getElementById("botonComenzar")
+        const salida = this.dom.getElementById("capaSalida")
 
+
+        /*         const transicionCierre = async () => {
+                    const cajaTransicion = crearElemento(document.body, "div")
+                    const estiloCajaTransicion = {
+                        position: "absolute",
+                        top: 0,
+                        width: "100%",
+                        height: "100%",
+                        transition: "2s"
+                    }
+                    await aplicarCss(cajaTransicion, estiloCajaTransicion)
+                    const vistaTransicion = crearElemento(cajaTransicion, "capa-transicion", null, null, { size: 10 })
+                    await esperar(1200)
+                    this.style.transition = "0.2s"
+                    this.style.opacity = 0
+                }
+         */
         const mostrarModal = () => {
             modal.classList.remove("modalOculto")
             modal.focus()
@@ -98,7 +122,14 @@ export class vistaLanding extends vistaBase {
             ;[botonLogin, botonComenzar].forEach(item => {
                 item.addEventListener("click", () => { mostrarModal() })
             })
-    }
 
+        const saltar = this.dom.getElementById("saltar")
+        saltar.addEventListener("click", async () => {
+                    const cajaTransicion = await crearElemento(document.body, "div", null, "cajaTransicion")
+                    const componenteTransicion = await crearElemento(cajaTransicion, "capa-transicion", null, null, {tempo: 0.5, espera: 2})
+
+/*             eventosPers.publicar(document,)
+ */        })
+    }
 }
 customElements.define("vista-landing", vistaLanding)

@@ -91,8 +91,7 @@ const desmarcarError = (item) => {
     }
 }
 
-const revisarForm = (campos, respuestaServidor) => {
-    const respuesta = JSON.parse(respuestaServidor)
+const revisarForm = (campos, respuesta) => {
     if (respuesta.tipo === "login" && respuesta.correo === false) { marcarError(campos[0], "El correo no existe"); return }
     if (respuesta.tipo === "login" && respuesta.pass === false) { marcarError(campos[1], "Contraseña incorrecta"); return }
     if (respuesta.tipo === "signUp" && respuesta.correo === true) { marcarError(campos[0], "Este correo ya esta registrado"); return }
@@ -100,7 +99,7 @@ const revisarForm = (campos, respuestaServidor) => {
 }
 
 const solicitarPass = async (respuesta, input, boton) => {
-    const cuenta = JSON.parse(respuesta)["correo"]
+    const cuenta = respuesta["correo"]
     actDesBoton(boton, "desactivar")
     if (!cuenta) {
         marcarError(input, "Esta cuenta no existe")
@@ -114,6 +113,16 @@ const solicitarPass = async (respuesta, input, boton) => {
     }
 }
 
+/* const iniciarLogin = async (respuesta, dom) => {
+    if (respuesta.tipo === "login" && respuesta.correo === true && respuesta.pass === true) {
+        const caja = dom.getElementById("cajaContenido")
+        caja.style.transition = "0.5s"
+        caja.style.transform = "scale(90%)"
+        caja.style.opacity = 0
+        caja.style.filter = "blur(10px)"
+    }
+}
+ */
 export const mainControlForm = async (dom) => {
 
     const iconosVisibilidad = Array.from(dom.querySelectorAll(".iconoForm:last-child"))
@@ -136,12 +145,12 @@ export const mainControlForm = async (dom) => {
 
     /* CONTROL ENVIO y RECEPCION DATOS */
     botonEnvio.addEventListener("click", async () => {
-        const respuestaServidor = await datos.enviarForm(tipoSeleccionado(dom), inputsCampo)
-        console.log(respuestaServidor)
+        const respuestaServidor = JSON.parse(await datos.enviarForm(tipoSeleccionado(dom), inputsCampo))
         revisarForm(inputsCampo, respuestaServidor)
-    })
+/*         iniciarLogin(respuestaServidor, dom)
+ */    })
     botonSolicitarPass.addEventListener("click", async () => {
-        const respuestaServidor = await datos.enviarSolicitudPass(inputsCampo[0].value)
+        const respuestaServidor = JSON.parse(await datos.enviarSolicitudPass(inputsCampo[0].value))
         console.log(respuestaServidor)
         solicitarPass(respuestaServidor, inputsCampo[0], botonSolicitarPass)
     })

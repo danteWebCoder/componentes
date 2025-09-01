@@ -13,7 +13,7 @@ export class modal extends vistaBase {
         this.importarGF(this.dom, "https://fonts.googleapis.com/css2?family=Walter+Turncoat")
 
         this.dom.innerHTML += `
-        <div class="cajaContenido centrado relativo borderGrisR8">
+        <div id="cajaContenido" class="cajaContenido centrado relativo borderGrisR8">
             <div id="cajaComponente" class="cajaComponente absoluto"></div>
             <form id="formLanding" class="max absoluto colCenEspaciado">
                 <section class="cajaTipos colCenEspaciado relativo">
@@ -72,7 +72,7 @@ export class modal extends vistaBase {
         `
 
         this.cajaComponente = this.dom.querySelector("#cajaComponente")
-/*         this.componente = crearElemento(this.cajaComponente, "fondo-burbujas", null, null, {
+        this.componente = crearElemento(this.cajaComponente, "fondo-burbujas", null, null, {
             burbujas: 60,
             size: 200,
             tempo: 8,
@@ -82,9 +82,8 @@ export class modal extends vistaBase {
             difuminado: 6,
             activo: false
         })
- */    } 
+    } 
 
- /* REVISAR LOS TIMERS DEL COMPONENTE Y CAMBIARLOS POR METODOS DE CLASE */
     connectedCallback() {
 
         const modal = this
@@ -105,9 +104,9 @@ export class modal extends vistaBase {
 
     attributeChangedCallback(atributo, valor, nuevoValor) {
         nuevoValor === "true"
-/*             ? this.componente.setAttribute("activo", true)
+            ? this.componente.setAttribute("activo", true)
             : this.componente.setAttribute("activo", false)
- */    }
+    }
 
 }
 customElements.define("modal-login", modal)
